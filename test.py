@@ -42,8 +42,9 @@ def main():
         print(f"=== 正在檢查課程：{course_name} (ID: {course_id}) ===")
 
         # 2. 抓該課程的作業 (CourseWork)
-        coursework_result = service.courses().courseWork().list(courseId=course_id, pageSize=3).execute()
-        courseworks = coursework_result.get("courseWork", [])
+        coursework = service.courses().courseWork().list(courseId=course_id).execute()
+        courseworks = coursework.get("courseWork", [])
+        # submissions = service.courses().courseWork().studentSubmissions().list(courseId=course_id, courseWorkId=courseworks[0]["id"]).execute()
 
         if not courseworks:
             print("  這門課目前沒有作業。")
