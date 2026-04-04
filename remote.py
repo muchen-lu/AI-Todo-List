@@ -19,16 +19,14 @@ def main(timing: Literal["morning", "night"]) :
     if timing == "night" :
         existing_tasks = get_data()
         todo = get_5_tasks(existing_tasks)
-        todo = [task.title for task in todo]
+        todo = [TodoItem(id=task.id, title=task.title, deadline=task.deadline) for task in todo]
         temp_task = todo
         send_line_notification(todo, "night")
     else :
         send_line_notification(temp_task, "morning")
 
 if __name__ == "__main__" :
-    main("night")
-    main("morning")
-    # scheduler = BackgroundScheduler()
-    # scheduler.add_job(lambda: main("morning"), trigger="cron", hour=7, minute=0)
-    # scheduler.add_job(lambda: main("night"), trigger="cron", hour=22, minute=0)
-    # scheduler.start()
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(lambda: main("morning"), trigger="cron", hour=7, minute=0)
+    scheduler.add_job(lambda: main("night"), trigger="cron", hour=22, minute=0)
+    scheduler.start()
