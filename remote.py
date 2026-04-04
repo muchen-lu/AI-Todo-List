@@ -8,7 +8,6 @@ load_dotenv()
 
 from models import TodoItem
 from line_notifier import send_line_notification
-from task_catcher import get_classroom, get_ono
 from database_manager import push_data, get_data
 from ai_client import get_5_tasks
 
