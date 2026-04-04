@@ -57,23 +57,13 @@ confirme_window = None
 def main() :
     global confirme_window
     existing_tasks = get_data()
-    wait_for_separate_tasks = []
-    for task in existing_tasks :
-        if task.deadline :
-            if datetime.strptime(task.deadline, "%Y-%m-%d %H:%M") - datetime.now() < timedelta(days=14) and task.subtasks is None :
-                wait_for_separate_tasks.append(task)
     
     existing_titles = {task.title for task in existing_tasks}
     
     catched_tasks = get_classroom() + get_ono()
     new_tasks = [task for task in catched_tasks if task.title not in existing_titles]
     
-    for task in new_tasks :
-        if task.deadline :
-            if datetime.strptime(task.deadline, "%Y-%m-%d %H:%M") - datetime.now() < timedelta(days=14) :
-                wait_for_separate_tasks.append(task)
-    
-    confirm_window = TaskCatchConfirmationUI(wait_for_separate_tasks)
+    confirm_window = TaskCatchConfirmationUI(new_tasks)
     confirm_window.show()
     
     def process_task(tasks: list[TodoItem]) :
@@ -107,5 +97,5 @@ if __name__ == "__main__":
     hotkey_signal.triggered.connect(lambda: (window.showNormal(), window.activateWindow()))
     keyboard.add_hotkey("alt+t", lambda: hotkey_signal.triggered.emit())
 
-    main()
+    # main()
     sys.exit(app.exec())
