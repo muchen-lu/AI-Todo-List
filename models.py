@@ -3,15 +3,28 @@ from typing import List, Optional
 import uuid
 
 class SubtaskItem(BaseModel) :
-    id: str = Field(default = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免子任務重名覆蓋問題")
+    id: str = Field(default_factory = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免子任務重名覆蓋問題")
     title: str = Field(description = "子任務標題")
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "子任務截止日期，格式為 YYYY-MM-DD")
     
+    @model_validator(mode = "before")
+    @classmethod
+    def validate_deadline(cls, values) :
+        deadline = values.get("deadline").split(" ")
+        date = deadline[0]
+        if len(deadline) == 1 :
+            time = "23:59"
+        else :
+            time = deadline[1]
+        values["deadline"] = f"{date} {time}"
+        
+        return values
+    
 class TodoItem(BaseModel) :
-    id: str = Field(default = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免任務重名覆蓋問題")
+    id: str = Field(default_factory = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免任務重名覆蓋問題")
     title: str = Field(description = "任務標題")
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "任務截止日期，格式為 YYYY-MM-DD")
-    subtasks: List[SubtaskItem] = Field(default_factory=list, description = "子任務列表，預設為空列表")
+    subtasks: Optional[List[SubtaskItem]] = Field(None, description = "子任務列表，預設為空列表")
 
 class GCItem(BaseModel) :
     title: str = Field(alias = "title", description = "作業名稱")

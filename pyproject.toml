@@ -5,11 +5,13 @@ description = "這是一個用 AI 來協助管理任務的工具，會自動從 
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "apscheduler>=3.11.2",
     "beautifulsoup4>=4.14.3",
     "dotenv>=0.9.9",
     "firebase-admin>=7.3.0",
     "google-api-python-client>=2.193.0",
     "google-auth-oauthlib>=1.3.1",
+    "google-generativeai>=0.8.6",
     "keyboard>=0.13.5",
     "line-bot-sdk>=3.22.0",
     "playwright>=1.58.0",

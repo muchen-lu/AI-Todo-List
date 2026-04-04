@@ -1,12 +1,20 @@
 import sys
+from dotenv import load_dotenv
 from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt6.QtGui import QIcon, QAction
-from ui import ModernTaskUI, HotkeySignal
+
+load_dotenv()
+
+from ui import ModernTaskUI, HotkeySignal, TaskCatchConfirmationUI
 from models import TodoItem
 from line_notifier import send_line_notification
 from task_catcher import get_classroom, get_ono
 from database_manager import push_data, get_data
 import keyboard
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import datetime, timedelta
+from ai_client import generate_subtasks
+
 
 def create_tray(app, window):
     # 1. 初始化託盤圖示
@@ -44,6 +52,40 @@ def create_tray(app, window):
     
     return tray
 
+confirme_window = None
+
+def main() :
+    global confirme_window
+    existing_tasks = get_data()
+    wait_for_separate_tasks = []
+    for task in existing_tasks :
+        if task.deadline :
+            if datetime.strptime(task.deadline, "%Y-%m-%d %H:%M") - datetime.now() < timedelta(days=14) and task.subtasks is None :
+                wait_for_separate_tasks.append(task)
+    
+    existing_titles = {task.title for task in existing_tasks}
+    
+    catched_tasks = get_classroom() + get_ono()
+    new_tasks = [task for task in catched_tasks if task.title not in existing_titles]
+    
+    for task in new_tasks :
+        if task.deadline :
+            if datetime.strptime(task.deadline, "%Y-%m-%d %H:%M") - datetime.now() < timedelta(days=14) :
+                wait_for_separate_tasks.append(task)
+    
+    confirm_window = TaskCatchConfirmationUI(wait_for_separate_tasks)
+    confirm_window.show()
+    
+    def process_task(tasks: list[TodoItem]) :
+        for task in tasks :
+            if task["should_split"] :
+                subtasks = generate_subtasks(task["task"])
+                task["task"].subtasks = subtasks
+            push_data(task["task"])
+    
+    confirm_window.confirmed_tasks.connect(lambda tasks: process_task(tasks))
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     
@@ -54,11 +96,16 @@ if __name__ == "__main__":
     
     # 初始化系統託盤
     tray_icon = create_tray(app, window)
+    
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(lambda: main(), trigger="cron", hour=7, minute=0)
+    scheduler.add_job(lambda: main(), trigger="cron", hour=20, minute=0)
+    scheduler.start()
 
     # 快捷鍵邏輯 (Alt+T)
     hotkey_signal = HotkeySignal()
     hotkey_signal.triggered.connect(lambda: (window.showNormal(), window.activateWindow()))
     keyboard.add_hotkey("alt+t", lambda: hotkey_signal.triggered.emit())
 
-    window.show()
+    main()
     sys.exit(app.exec())

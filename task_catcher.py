@@ -3,7 +3,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-import re
+import datetime
 from playwright.sync_api import Playwright, sync_playwright, expect
 from models import TodoItem, GCItem
 
@@ -38,7 +38,7 @@ def get_ono() -> list[TodoItem]:
     tasks = []
     def run(playwright: Playwright) -> None :
         nonlocal tasks
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=True)
         context = browser.new_context()
         page = context.new_page()
         page.goto("https://cooc.tp.edu.tw/oauth2/oauth/authorize?client_id=2gMSkBmGUSJVkwCrZz2fnMNtMj2Dfasc&response_type=code&redirect_uri=https%3A//ono.tp.edu.tw/login&state=L3VzZXIvaW5kZXg=&scope=User.Info,User.Role,User.RoleDetail,User.IDNumber,User.SSORole,User.EMail#/")
@@ -56,7 +56,7 @@ def get_ono() -> list[TodoItem]:
         tasks = []
         for item in items :
             title = item.locator(".title-text span").inner_text().strip()
-            deadline = item.locator("span:has-text('截止日期')").inner_text().strip()
+            deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
             tasks.append(TodoItem(title = title, deadline = deadline))
 
         # ---------------------
@@ -87,9 +87,10 @@ def get_classroom() -> list[TodoItem] :
 
         for i in range(len(homeworks)) :
             if not (submissions[i]["state"] in ("TURNED_IN", "RETURNED")) :
-                homework = homeworks[i]
-                print(homework)
-                homework = GCItem(**homework)
-                tasks.append(TodoItem(title = homework.title, deadline = homework.deadline))
+                if ("dueDate" not in homeworks[i]) or (datetime.datetime.strptime(str(homeworks[i]["dueDate"]["year"])+"-"+str(homeworks[i]["dueDate"]["month"])+"-"+str(homeworks[i]["dueDate"]["day"]), "%Y-%m-%d") >= datetime.datetime.now() - datetime.timedelta(days = 30)) :
+                    homework = homeworks[i]
+                    # print(homework)
+                    homework = GCItem(**homework)
+                    tasks.append(TodoItem(title = homework.title, deadline = homework.deadline))
 
     return tasks
