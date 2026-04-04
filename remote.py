@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 from typing import Literal
 import pytz
 
@@ -27,7 +27,7 @@ def main(timing: Literal["morning", "night"]) :
 
 if __name__ == "__main__" :
     tw_tz = pytz.timezone('Asia/Taipei')
-    scheduler = BackgroundScheduler(timezone=tw_tz)
+    scheduler = BlockingScheduler(timezone=tw_tz)
     scheduler.add_job(lambda: main("morning"), trigger="cron", hour=7, minute=0)
     scheduler.add_job(lambda: main("night"), trigger="cron", hour=22, minute=0)
     scheduler.start()
