@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from apscheduler.schedulers.background import BackgroundScheduler
 from typing import Literal
+import pytz
 
 load_dotenv()
 
@@ -25,7 +26,8 @@ def main(timing: Literal["morning", "night"]) :
         send_line_notification(temp_task, "morning")
 
 if __name__ == "__main__" :
-    scheduler = BackgroundScheduler()
+    tw_tz = pytz.timezone('Asia/Taipei')
+    scheduler = BackgroundScheduler(timezone=tw_tz)
     scheduler.add_job(lambda: main("morning"), trigger="cron", hour=7, minute=0)
     scheduler.add_job(lambda: main("night"), trigger="cron", hour=22, minute=0)
     scheduler.start()
