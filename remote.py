@@ -19,6 +19,7 @@ def main(timing: Literal["morning", "night"]) :
     if timing == "night" :
         existing_tasks = get_data()
         todo = get_5_tasks(existing_tasks)
+        todo = [task.title for task in todo]
         temp_task = todo
         send_line_notification(todo, "night")
     else :

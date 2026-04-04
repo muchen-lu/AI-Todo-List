@@ -37,7 +37,7 @@ def send_line_notification(tasks: List[str], timing: Literal["morning", "night"]
     """
     message = choice(morning_greetings) if timing == "morning" else choice(night_greetings)
     for task in tasks :
-        message += f"\n- {task}"
+        message += f"\n• {task}"
     message = TextMessage(text=message)
     push_message_request = PushMessageRequest(to=LINE_USER_ID, messages=[message])
     

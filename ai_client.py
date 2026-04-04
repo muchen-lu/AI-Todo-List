@@ -54,7 +54,8 @@ def get_5_tasks(datas: list[TodoItem]) -> list[TodoItem] :
     ]
     </回覆格式限制>
     """
-    response = model.generate_content(prompt).text
+    response = model.generate_content(prompt).text.replace("```json", "").replace("```", "").strip()
+    print(response)
     try :
         tasks = json.loads(response)
         return [TodoItem(id = task["id"], title = task["title"], deadline = task["deadline"]) for task in tasks]
