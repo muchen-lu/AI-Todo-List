@@ -3,6 +3,7 @@ from typing import List, Optional
 import uuid
 
 class SubtaskItem(BaseModel) :
+    parent: str = Field(description = "父任務的 id")
     id: str = Field(default_factory = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免子任務重名覆蓋問題")
     title: str = Field(description = "子任務標題")
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "子任務截止日期，格式為 YYYY-MM-DD")

@@ -114,7 +114,7 @@ def generate_subtasks(task: TodoItem) -> list[SubtaskItem] :
         subtasks = json.loads(response)
         if subtasks == [] :
             return []
-        return [SubtaskItem(title = subtask["title"], deadline = subtask["deadline"]) for subtask in subtasks]
+        return [SubtaskItem(parent = task.id, title = subtask["title"], deadline = subtask["deadline"]) for subtask in subtasks]
     except Exception as e :
         raise Exception(f"解析模型回覆失敗：{e}")
 

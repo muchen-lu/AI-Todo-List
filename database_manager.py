@@ -33,3 +33,18 @@ def get_data() -> list[TodoItem] :
         return [TodoItem(id=key, title=value["title"], deadline=value["deadline"]) for key, value in data.items()]
     except Exception as e :
         raise Exception(f"從資料庫獲取資料失敗：{e}")
+
+def delete_data(task_id: str, subtask_id: str = None) :
+    """從資料庫刪除資料
+
+    Args:
+        task_id (str): 任務 ID，作為資料庫中的識別指標
+        subtask_id (str, optional): 子任務 ID，作為資料庫中的識別指標
+    """
+    try :
+        if subtask_id is not None :
+            ref.child(task_id).child("subtasks").child(subtask_id).delete()
+        else :
+            ref.child(task_id).delete()
+    except Exception as e :
+        raise Exception(f"從資料庫刪除資料失敗：{e}")

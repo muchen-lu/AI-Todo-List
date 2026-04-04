@@ -1,7 +1,12 @@
 import os
 from typing import List, Literal
 from random import choice
-from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, PushMessageRequest, TextMessage
+import json
+from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, PushMessageRequest, TextMessage, FlexMessage, FlexContainer
+from models import TodoItem, SubtaskItem
+from dotenv import load_dotenv
+
+load_dotenv()
 
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
 LINE_USER_ID = os.getenv("LINE_USER_ID")
@@ -28,20 +33,99 @@ night_greetings = ["晚安！先幫你整理好明天的 5 件事，看完就能
 configuration = Configuration(access_token=LINE_CHANNEL_ACCESS_TOKEN)
 line_bot = MessagingApi(ApiClient(configuration))
 
-def send_line_notification(tasks: List[str], timing: Literal["morning", "night"]) -> None:
+def send_line_notification(tasks: List[TodoItem | SubtaskItem], timing: Literal["morning", "night"]) -> None:
     """將任務藉由 Line 傳送給使用者
 
     Args:
-        tasks (List[str]): 任務清單
+        tasks (List[TodoItem | SubtaskItem]): 任務清單
         timing (Literal["morning", "night"]): 通知時機
     """
     message = choice(morning_greetings) if timing == "morning" else choice(night_greetings)
-    for task in tasks :
-        message += f"\n• {task}"
+    task_message = {"type": "carousel", "contents": []}
+    messages = []
+    if timing == "night" :
+        for task in tasks :
+            message += f"\n• {task.title}"
+    elif timing == "morning" :
+        for task in tasks :
+            template = {
+                "type": "bubble",
+                "body": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": task.title,
+                            "weight": "bold",
+                            "size": "xl",
+                            "wrap": True
+                        },
+                        {
+                            "type": "box",
+                            "layout": "vertical",
+                            "margin": "lg",
+                            "spacing": "sm",
+                            "contents": [
+                                {
+                                    "type": "box",
+                                    "layout": "baseline",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "Deadline",
+                                            "color": "#aaaaaa",
+                                            "size": "sm",
+                                            "flex": 2
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": task.deadline if task.deadline else "無",
+                                            "wrap": True,
+                                            "color": "#666666",
+                                            "size": "sm",
+                                            "flex": 4
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "footer": {
+                    "type": "box",
+                    "layout": "vertical",
+                    "spacing": "sm",
+                    "contents": [
+                        {
+                            "type": "button",
+                            "style": "primary", # 改為 primary 比較顯眼，你也可以用 link
+                            "height": "sm",
+                            "action": {
+                                "type": "postback", # 修正：要傳 data 必須用 postback，不能用 uri
+                                "label": "Complete",
+                                "data": f"action=complete&task={task.id if isinstance(task, TodoItem) else task.parent + '&subtask=' + task.id}",
+                                "displayText": f"完成「{task.title}」了！"
+                            },
+                            "color": "#06C755"
+                        }
+                    ],
+                    "flex": 0
+                }
+            }
+            task_message["contents"].append(template)
+        task_message = FlexMessage(alt_text="你的任務清單", contents=FlexContainer.from_dict(task_message))
+        messages.append(task_message)
+    
     message = TextMessage(text=message)
-    push_message_request = PushMessageRequest(to=LINE_USER_ID, messages=[message])
+    messages.insert(0, message)
+    push_message_request = PushMessageRequest(to=LINE_USER_ID, messages=messages)
     
     try :
         line_bot.push_message(push_message_request)
     except Exception as e:
         raise Exception(f"寄送 Line Message 失敗：{e}")
+
+if __name__ == "__main__" :
+    send_line_notification([TodoItem(title="測試任務", deadline="2026-12-31 23:59"), TodoItem(title="測試任務2", deadline="2026-12-31 23:59"), TodoItem(title="測試任務3", deadline="2026-12-31 23:59")], "morning")
