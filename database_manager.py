@@ -30,7 +30,7 @@ def get_data() -> list[TodoItem] :
         data = ref.get()
         if data is None :
             return []
-        return [TodoItem(id=key, title=value["title"], deadline=value["deadline"]) for key, value in data.items()]
+        return [TodoItem(id=key, title=value["title"], deadline=value.get("deadline")) for key, value in data.items()]
     except Exception as e :
         raise Exception(f"從資料庫獲取資料失敗：{e}")
 
