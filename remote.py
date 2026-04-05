@@ -12,7 +12,7 @@ from line_notifier import send_line_notification
 from database_manager import push_data, get_data
 from ai_client import get_5_tasks
 
-temp_task = []
+temp_task = [TodoItem(id="temp", title="暫存任務", deadline=None)]
 
 def main(timing: Literal["morning", "night"]) :
     global temp_task
