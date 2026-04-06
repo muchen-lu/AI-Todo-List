@@ -28,7 +28,7 @@ def callback():
 @handler.add(PostbackEvent)
 def handle_postback(event) :
     data = event.postback.data
-    params = {key: value for key, value in parse_qs(data).items()}
+    params = {key: value[0] for key, value in parse_qs(data).items()}
     
     action = params.get("action")
     task_id = params.get("task")
