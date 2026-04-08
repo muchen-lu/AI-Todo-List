@@ -30,6 +30,10 @@ def create_tray(app, window):
     wake_action = QAction("喚醒介面 (Alt+T)", menu)
     wake_action.triggered.connect(lambda: (window.showNormal(), window.activateWindow()))
     
+    # 自動抓取任務動作
+    auto_fetch_action = QAction("立即抓取任務", menu)
+    auto_fetch_action.triggered.connect(lambda: main())
+    
     # 退出動作
     exit_action = QAction("完全退出程式", menu)
     exit_action.triggered.connect(app.quit)
@@ -87,10 +91,10 @@ if __name__ == "__main__":
     # 初始化系統託盤
     tray_icon = create_tray(app, window)
     
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(lambda: main(), trigger="cron", hour=7, minute=0)
-    scheduler.add_job(lambda: main(), trigger="cron", hour=20, minute=0)
-    scheduler.start()
+    # scheduler = BackgroundScheduler()
+    # scheduler.add_job(lambda: main(), trigger="cron", hour=7, minute=0)
+    # scheduler.add_job(lambda: main(), trigger="cron", hour=20, minute=0)
+    # scheduler.start()
 
     # 快捷鍵邏輯 (Alt+T)
     hotkey_signal = HotkeySignal()
