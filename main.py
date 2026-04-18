@@ -39,6 +39,7 @@ def create_tray(app, window):
     exit_action.triggered.connect(app.quit)
 
     menu.addAction(wake_action)
+    menu.addAction(auto_fetch_action)
     menu.addSeparator() # 分隔線
     menu.addAction(exit_action)
 
@@ -56,10 +57,10 @@ def create_tray(app, window):
     
     return tray
 
-confirme_window = None
+confirm_window = None
 
 def main() :
-    global confirme_window
+    global confirm_window
     existing_tasks = get_data()
     
     existing_titles = {task.title for task in existing_tasks}
@@ -70,7 +71,7 @@ def main() :
     confirm_window = TaskCatchConfirmationUI(new_tasks)
     confirm_window.show()
     
-    def process_task(tasks: list[TodoItem]) :
+    def process_task(tasks: list[dict]) :
         for task in tasks :
             if task["should_split"] :
                 subtasks = generate_subtasks(task["task"])
