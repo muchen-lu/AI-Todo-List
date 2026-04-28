@@ -1,12 +1,15 @@
 from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional
 import uuid
+import datetime
 
 class SubtaskItem(BaseModel) :
     parent: str = Field(description = "父任務的 id")
     id: str = Field(default_factory = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免子任務重名覆蓋問題")
     title: str = Field(description = "子任務標題")
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "子任務截止日期，格式為 YYYY-MM-DD")
+    expect_point: int = Field(..., description = "子任務預計耗費能量，0~10")
+    used_point: Optional[int] = Field(None, description = "子任務實際耗費能量，0~10，預設為 None 代表尚未完成")
     
     @model_validator(mode = "before")
     @classmethod
@@ -26,6 +29,8 @@ class TodoItem(BaseModel) :
     title: str = Field(description = "任務標題")
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "任務截止日期，格式為 YYYY-MM-DD")
     subtasks: Optional[List[SubtaskItem]] = Field(None, description = "子任務列表，預設為空列表")
+    expect_point: int = Field(..., description = "任務預計耗費能量，0~10")
+    used_point: Optional[int] = Field(None, description = "任務實際耗費能量，0~10，預設為 None 代表尚未完成")
 
 class GCItem(BaseModel) :
     title: str = Field(alias = "title", description = "作業名稱")
@@ -44,4 +49,19 @@ class GCItem(BaseModel) :
         else :
             values["deadline"] = None
         
+        return values
+    
+class CalendarEvent(BaseModel) :
+    title: str = Field(alias = "summary", description = "事件名稱")
+    today: bool = Field(default = False, description = "是否為當日事件")
+    long: int = Field(..., description = "事件持續時間，單位為分鐘")
+    
+    @model_validator(mode = "before")
+    @classmethod
+    def validate_long(cls, values) :
+        start = values["start"].get("dateTime", values["start"].get("date"))
+        end = values["end"].get("dateTime", values["end"].get("date"))
+        if datetime.datetime.fromisoformat(start).date() <= datetime.datetime.now().date() <= datetime.datetime.fromisoformat(end).date() :
+            values["today"] = True
+        values["long"] = int((datetime.datetime.fromisoformat(end) - datetime.datetime.fromisoformat(start)).total_seconds() // 60)
         return values

@@ -6,6 +6,7 @@ from googleapiclient.discovery import build
 import datetime
 from playwright.sync_api import Playwright, sync_playwright, expect
 from models import TodoItem, GCItem
+from ai_client import eliminate_point
 
 # 更新權限範圍
 SCOPES = [
@@ -15,8 +16,8 @@ SCOPES = [
 ]
 
 creds = None
-if os.path.exists("token.json"):
-    creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+if os.path.exists("local_token.json"):
+    creds = Credentials.from_authorized_user_file("local_token.json", SCOPES)
 
 if not creds or not creds.valid:
     if creds and creds.expired and creds.refresh_token:
@@ -24,7 +25,7 @@ if not creds or not creds.valid:
     else:
         flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
         creds = flow.run_local_server(port=0)
-    with open("token.json", "w") as token:
+    with open("local_token.json", "w") as token:
         token.write(creds.to_json())
 
 # 建立 Classroom 工具連線
@@ -55,9 +56,10 @@ def get_ono() -> list[TodoItem]:
         items = page.locator(".todo-list").all()
         tasks = []
         for item in items :
-            title = item.locator(".title-text span").inner_text().strip()
-            deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
-            tasks.append(TodoItem(title = title, deadline = deadline))
+            # title = item.locator(".title-text span").inner_text().strip()
+            # deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
+            item = eliminate_point(item)
+            tasks.append(TodoItem(item["title"], item["deadline"], item["expect_point"]))
 
         # ---------------------
         context.close()
@@ -94,3 +96,8 @@ def get_classroom() -> list[TodoItem] :
                     tasks.append(TodoItem(title = homework.title, deadline = homework.deadline))
 
     return tasks
+
+if __name__ == "__main__" :
+    tasks = get_ono()
+    for task in tasks :
+        print(task.title, task.deadline, task.expect_point)

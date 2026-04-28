@@ -4,11 +4,72 @@ import os
 import json
 from datetime import datetime
 from models import TodoItem, SubtaskItem
+from calendar_catcher import get_calendar_events
 
 load_dotenv()
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash")
+
+def eliminate_point(task: list) -> list :
+    """利用 AI 估計任務所需能量，並將其轉化為 0~10 的 expect_point"""
+    
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+    calendar_context = get_calendar_events()
+    prompt = f"""
+    <角色>
+    你是一名擁有 10 年經驗、專精於「動態負載平衡」的高階行政特助。你擅長結合使用者的生活節奏（日曆）與任務難度（能量）來安排日程，確保使用者在達成目標的同時，能保有完全的休息品質。
+    </角色>
+
+    <背景資訊>
+    現在時間：{current_time}
+    週日目標：絕對休息日（Energy Budget = 0）。
+    </背景資訊>
+
+    <日曆情境 (即日起至週六)>
+    {calendar_context}
+    </日曆情境>
+
+    <能量評估準則 (1-10 分級)>
+    請根據標題語意與使用者特質，自動為任務分配 energy_load：
+    - 1-2 (極輕量): 填表、回訊等雜事。
+    - 3-4 (常規): 英文單字、社團通知、一般課後練習。
+    - 5-6 (有感): 需 1 小時專注。如：週記、練習新鼓譜、數學一般作業。
+    - 7-8 (高度耗能): 需 2 小時以上深度專注。如：程式專案開發、數學難題、社團企劃。
+    - 9-10 (大魔王): 考前大衝刺、大型期末報告。
+    *注意：若標題包含「數學」，能量分值自動權衡 +1 分。*
+    </能量評估準則>
+
+    <任務篩選邏輯>
+    1. 週六清零原則：若任務之真實截止日 (Deadline) 在「下週三 (含) 以前」，請視其為最高優先級，必須安排在週六 23:59 前完成。
+    2. 能量負載平衡：
+    - 參考 <日曆情境>：若當日已有長時間行程（如練團、上課），請調降今日可分配的 energy_load 總額。
+    - 每日天花板：無論日曆多空，今日派發任務的 energy_load 總和嚴格禁止超過 30 點。
+    3. 前置化策略：優先將紅區任務排在週四、週五，避免週六出現任務大噴發。
+    4. 週日保護：禁止在週日安排任何任務。
+    </任務篩選邏輯>
+
+    <現有任務>
+    {task}
+    </現有任務>
+
+    <回覆格式限制>
+    1. 僅回傳 JSON：不要包含任何解釋、代碼塊標籤或開場白。
+    2. 結構要求：
+    {{
+        "title": "任務標題",
+        "deadline": "YYYY-MM-DD HH:mm",
+        "expect_point": 0~10
+    }}
+    </回覆格式限制>
+    """
+    response = model.generate_content(prompt).text.replace("```json", "").replace("```", "").strip()
+    print(response)
+    try :
+        tasks = json.loads(response)
+        return [TodoItem(id = task["id"], title = task["title"], deadline = task["deadline"]) for task in tasks]
+    except Exception as e :
+        raise Exception(f"解析模型回覆失敗：{e}")
 
 def get_5_tasks(datas: list[TodoItem]) -> list[TodoItem] :
     """從現有任務中，篩選代辦 5 件事情
