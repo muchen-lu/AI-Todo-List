@@ -29,5 +29,5 @@ if __name__ == "__main__" :
     tw_tz = pytz.timezone('Asia/Taipei')
     scheduler = BlockingScheduler(timezone=tw_tz)
     scheduler.add_job(lambda: main("morning"), trigger="cron", day_of_week="mon-sat", hour=7, minute=0)
-    scheduler.add_job(lambda: main("night"), trigger="cron", day_of_week="sun-fri", hour=22, minute=0)
+    scheduler.add_job(lambda: main("night"), trigger="cron", day_of_week="0-4, 6", hour=22, minute=0)
     scheduler.start()
