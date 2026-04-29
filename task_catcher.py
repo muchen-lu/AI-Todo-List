@@ -93,6 +93,7 @@ def get_classroom() -> list[TodoItem] :
                     homework = homeworks[i]
                     # print(homework)
                     homework = GCItem(**homework)
+                    homework = eliminate_point(homework)
                     tasks.append(TodoItem(title = homework.title, deadline = homework.deadline))
 
     return tasks

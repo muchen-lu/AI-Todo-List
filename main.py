@@ -13,7 +13,7 @@ from database_manager import push_data, get_data
 import keyboard
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
-from ai_client import generate_subtasks
+from ai_client import generate_subtasks, eliminate_point
 
 
 def create_tray(app, window):
@@ -76,6 +76,7 @@ def main() :
             if task["should_split"] :
                 subtasks = generate_subtasks(task["task"])
                 task["task"].subtasks = subtasks
+            task["task"].expect_point = eliminate_point(task["task"])
             push_data(task["task"])
     
     confirm_window.confirmed_tasks.connect(lambda tasks: process_task(tasks))
