@@ -2,10 +2,11 @@ import sys
 from dotenv import load_dotenv
 from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 from PyQt6.QtGui import QIcon, QAction
+from PyQt6.QtCore import QThread, pyqtSignal
 
 load_dotenv()
 
-from ui import ModernTaskUI, HotkeySignal, TaskCatchConfirmationUI
+from ui import ModernTaskUI, HotkeySignal, TaskCatchConfirmationUI, LoadingWidget
 from models import TodoItem
 from line_notifier import send_line_notification
 from task_catcher import get_classroom, get_ono
@@ -58,15 +59,36 @@ def create_tray(app, window):
     return tray
 
 confirm_window = None
+loading_win = None
+worker = None
+
+class TaskCatchThread(QThread) :
+    tasks_caught = pyqtSignal(list)
+
+    def run(self) :
+        tasks = get_ono() + get_classroom()
+        self.tasks_caught.emit(tasks)
 
 def main() :
-    global confirm_window
+    global confirm_window, loading_win, worker
+    
+    # 顯示 Loading 視窗
+    loading_win = LoadingWidget()
+    loading_win.start()
+    
+    # 開啟背景執行緒
+    worker = TaskCatchThread()
+    worker.tasks_caught.connect(lambda tasks: on_fetch_done(tasks))
+    worker.start()
+
+def on_fetch_done(tasks: list[TodoItem]) :
+    global confirm_window, loading_win
+    loading_win.stop()
     existing_tasks = get_data()
     
     existing_titles = {task.title for task in existing_tasks}
     
-    catched_tasks = get_classroom() + get_ono()
-    new_tasks = [task for task in catched_tasks if task.title not in existing_titles]
+    new_tasks = [task for task in tasks if task.title not in existing_titles]
     
     confirm_window = TaskCatchConfirmationUI(new_tasks)
     confirm_window.show()
@@ -76,7 +98,7 @@ def main() :
             if task["should_split"] :
                 subtasks = generate_subtasks(task["task"])
                 task["task"].subtasks = subtasks
-            task["task"].expect_point = eliminate_point(task["task"])
+            task["task"] = eliminate_point(task["task"])
             push_data(task["task"])
     
     confirm_window.confirmed_tasks.connect(lambda tasks: process_task(tasks))

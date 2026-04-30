@@ -4,7 +4,8 @@ from PyQt6.QtWidgets import (
     QLineEdit, QPushButton, QLabel, QDateEdit, QTimeEdit, 
     QCheckBox, QScrollArea, QFrame
 )
-from PyQt6.QtCore import Qt, QDate, QTime, pyqtSignal, QObject
+from PyQt6.QtCore import Qt, QDate, QTime, pyqtSignal, QObject, QTimer, QRectF
+from PyQt6.QtGui import QPainter, QColor, QPen, QFont
 from models import TodoItem, SubtaskItem
 
 # --- 現代感通用樣式表 ---
@@ -255,7 +256,8 @@ class TaskCatchConfirmationUI(QWidget):
 
         main_vbox.addWidget(self.container)
 
-    def submit_all(self):
+    def submit_all(self) :
+        self.hide()
         results = []
         for row in self.task_rows:
             if row['add'].isChecked():
@@ -266,7 +268,6 @@ class TaskCatchConfirmationUI(QWidget):
         
         if results:
             self.confirmed_tasks.emit(results)
-        self.hide()
 
     # 視窗拖動
     def mousePressEvent(self, event):
@@ -279,6 +280,66 @@ class TaskCatchConfirmationUI(QWidget):
             self.old_pos = event.globalPosition().toPoint()
     def mouseReleaseEvent(self, event):
         self.old_pos = None
+
+# --- 3. loading 介面
+class LoadingWidget(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # 設定視窗屬性：無邊框、最上層、不顯示在工作列
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.Tool)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setFixedSize(220, 220)
+        
+        self.angle = 0
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_animation)
+        
+    def update_animation(self):
+        # 每次旋轉 15 度
+        self.angle = (self.angle + 15) % 360
+        self.update() # 觸發 paintEvent 重新繪圖
+
+    def start(self):
+        self.timer.start(40) # 約 25 FPS
+        self.show()
+        self.center_on_screen()
+
+    def stop(self):
+        self.timer.stop()
+        self.close()
+
+    def center_on_screen(self):
+        # 讓 Loading 視窗顯示在螢幕正中央
+        screen = QApplication.primaryScreen().geometry()
+        self.move((screen.width() - self.width()) // 2, 
+                  (screen.height() - self.height()) // 2)
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        
+        # 1. 繪製背景外框 (與你現有的 MODERN_STYLE 色調一致)
+        painter.setBrush(QColor(25, 25, 25, 240)) # 深色半透明
+        painter.setPen(QPen(QColor(80, 120, 255, 150), 2)) # 藍色邊框
+        painter.drawRoundedRect(self.rect().adjusted(5, 5, -5, -5), 20, 20)
+        
+        # 2. 繪製旋轉中的圓弧
+        # 設定圓弧範圍
+        spinner_rect = QRectF(60, 45, 100, 100)
+        pen = QPen(QColor(129, 212, 250)) # 天藍色
+        pen.setWidth(6)
+        pen.setCapStyle(Qt.PenCapStyle.RoundCap) # 讓弧線末端圓潤
+        painter.setPen(pen)
+        
+        # 繪製一段 120 度的弧線，角度隨 self.angle 變化
+        # 注意：drawArc 的角度單位是 1/16 度
+        painter.drawArc(spinner_rect, -self.angle * 16, 120 * 16)
+        
+        # 3. 繪製中間文字
+        painter.setPen(QColor("#F0F0F0"))
+        painter.setFont(QFont("Microsoft JhengHei", 12, QFont.Weight.Bold))
+        # 文字稍微往下偏移一點，不要擋到圓弧中心
+        painter.drawText(self.rect().adjusted(0, 150, 0, 0), Qt.AlignmentFlag.AlignHCenter, "任務抓取中...")
 
 # --- 測試代碼 ---
 if __name__ == "__main__":

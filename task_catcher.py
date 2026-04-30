@@ -39,7 +39,7 @@ def get_ono() -> list[TodoItem]:
     tasks = []
     def run(playwright: Playwright) -> None :
         nonlocal tasks
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(headless=False)
         context = browser.new_context()
         page = context.new_page()
         page.goto("https://cooc.tp.edu.tw/oauth2/oauth/authorize?client_id=2gMSkBmGUSJVkwCrZz2fnMNtMj2Dfasc&response_type=code&redirect_uri=https%3A//ono.tp.edu.tw/login&state=L3VzZXIvaW5kZXg=&scope=User.Info,User.Role,User.RoleDetail,User.IDNumber,User.SSORole,User.EMail#/")
@@ -56,10 +56,10 @@ def get_ono() -> list[TodoItem]:
         items = page.locator(".todo-list").all()
         tasks = []
         for item in items :
-            # title = item.locator(".title-text span").inner_text().strip()
-            # deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
-            item = eliminate_point(item)
-            tasks.append(TodoItem(item["title"], item["deadline"], item["expect_point"]))
+            title = item.locator(".title-text span").inner_text().strip()
+            deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
+            # item = eliminate_point(item)
+            tasks.append(TodoItem(title = title, deadline = deadline))
 
         # ---------------------
         context.close()
@@ -93,7 +93,7 @@ def get_classroom() -> list[TodoItem] :
                     homework = homeworks[i]
                     # print(homework)
                     homework = GCItem(**homework)
-                    homework = eliminate_point(homework)
+                    # homework = eliminate_point(homework)
                     tasks.append(TodoItem(title = homework.title, deadline = homework.deadline))
 
     return tasks
