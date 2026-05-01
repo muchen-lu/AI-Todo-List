@@ -9,7 +9,7 @@ load_dotenv()
 
 from models import TodoItem
 from line_notifier import send_line_notification
-from database_manager import push_data, get_data
+from database_manager import push_task, get_tasks
 from ai_client import get_5_tasks
 
 temp_task = [TodoItem(id="temp", title="暫存任務", deadline=None)]
@@ -17,7 +17,7 @@ temp_task = [TodoItem(id="temp", title="暫存任務", deadline=None)]
 def main(timing: Literal["morning", "night"]) :
     global temp_task
     if timing == "night" :
-        existing_tasks = get_data()
+        existing_tasks = get_tasks()
         todo = get_5_tasks(existing_tasks)
         todo = [TodoItem(id=task.id, title=task.title, deadline=task.deadline) for task in todo]
         temp_task = todo

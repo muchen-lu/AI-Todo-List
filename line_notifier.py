@@ -2,7 +2,7 @@ import os
 from typing import List, Literal
 from random import choice
 import json
-from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, PushMessageRequest, TextMessage, FlexMessage, FlexContainer
+from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, PushMessageRequest, TextMessage, FlexMessage, FlexContainer, ReplyMessageRequest
 from models import TodoItem, SubtaskItem
 from dotenv import load_dotenv
 
@@ -29,6 +29,31 @@ night_greetings = ["晚安！先幫你整理好明天的 5 件事，看完就能
                    "晚安，明天的 5 件事已經排好隊了。先知道，明天就不會手忙腳亂。",
                    "明天的清單在這裡，現在先別想太多，好好充電，明天加油！",
                    "預告一下明天的重要任務，現在，先祝你有個好夢！"]
+l1_feedback = ["順手解決了一件小事！感覺還輕鬆嗎？",
+             "完成囉！這項任務處理起來還順利嗎？",
+             "輕鬆搞定，特助已經紀錄好了。體感難度是？",
+             "辛苦了！這件事對你來說應該不難吧？",
+             "沒問題，這項任務的實際耗能感覺如何？"]
+l2_feedback = ["任務順利完成，辛苦了！體感難度跟預估的一樣嗎？",
+               "穩穩地處理完一項工作了。實際能耗大約是多少呢？",
+               "辛苦了！這種難度的任務，處理起來還順手嗎？",
+               "完成！特助想確認一下，這件事的難度符合預期嗎？",
+               "又跨出一步了。幫我校準一下這項任務的體感："]
+l3_feedback = ["這段時間辛苦了，先休息一下吧。這項任務累嗎？",
+               "完成了一項有份量的任務！感覺能量消耗了多少呢？",
+               "辛苦了！這件事應該花了不少心思，體感難度是？",
+               "終於處理完了，喝口水休息吧。你覺得這項任務硬嗎？",
+               "專注模式結束。幫特助評估一下這次的真實耗能："]
+l4_feedback = ["處理這麼複雜的任務辛苦了！現在感覺體力還好嗎？",
+               "完成了這項大工程，真的不簡單。你給體感幾分？",
+               "辛苦你了，這件事應該讓你花了不少體力與心神吧？",
+               "任務大功告成！這場長時間的挑戰，感覺如何？",
+               "特助感覺這件事挺耗能的，你真實的體感分數是？"]
+l5_feedback = ["真的辛苦了！完成這項任務一定很累吧，快去休息。",
+               "這項任務難度很高，能處理完真的很不容易，還好嗎？",
+               "辛苦你了，這應該是今天最硬的一項了，體感是？",
+               "終於搞定了！特助很關心你現在的狀態，感覺如何？",
+               "耗費這麼多能量辛苦了。這項魔王任務你實際給幾分？"]
 
 configuration = Configuration(access_token=LINE_CHANNEL_ACCESS_TOKEN)
 line_bot = MessagingApi(ApiClient(configuration))
@@ -127,5 +152,130 @@ def send_line_notification(tasks: List[TodoItem | SubtaskItem], timing: Literal[
     except Exception as e:
         raise Exception(f"寄送 Line Message 失敗：{e}")
 
-if __name__ == "__main__" :
-    send_line_notification([TodoItem(title="測試任務", deadline="2026-12-31 23:59"), TodoItem(title="測試任務2", deadline="2026-12-31 23:59"), TodoItem(title="測試任務3", deadline="2026-12-31 23:59")], "morning")
+def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs) -> None:
+    """回覆使用者訊息
+
+    Args:
+        mode (Literal["task", "notification"]): 回覆類型
+        reply_token (str): Line 的 reply token
+    """
+    if mode == "task" and "title" not in kargs or "expect_point" or kargs or "task_id" not in kargs :
+        raise ValueError("回覆任務訊息時必須提供 title、expect_point 以及 task_id 或 subtask_id")
+    title = kargs.get("title")
+    expect_point = kargs.get("expect_point")
+    task_id = kargs.get("task_id")
+    subtask_id = kargs.get("subtask_id")
+    
+    match expect_point :
+        case point if 1 <= point <= 2 :
+            feedback = choice(l1_feedback)
+        case point if 3 <= point <= 4 :
+            feedback = choice(l2_feedback)
+        case point if 5 <= point <= 6 :
+            feedback = choice(l3_feedback)
+        case point if 7 <= point <= 8 :
+            feedback = choice(l4_feedback)
+        case point if 9 <= point <= 10 :
+            feedback = choice(l5_feedback)
+
+    template = {
+        "type": "bubble",
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+            {
+                "type": "text",
+                "text": f"恭喜完成「{title}」任務",
+                "weight": "bold",
+                "size": "lg",
+                "wrap": True
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": feedback,
+                    "wrap": True
+                }
+                ]
+            }
+            ]
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "sm",
+            "contents": [
+            {
+                "type": "button",
+                "style": "secondary",
+                "height": "sm",
+                "action": {
+                "type": "postback",
+                "label": "🍃 意外地輕鬆",
+                "data": f"action=reply&task={task_id if subtask_id is None else task_id + '&subtask=' + subtask_id}&offset=-2",
+                "displayText": "這件事比想像中輕鬆很多！🍃"
+                },
+                "color": "#4CAF50"
+            },
+            {
+                "type": "button",
+                "style": "secondary",
+                "height": "sm",
+                "action": {
+                "type": "postback",
+                "label": "👌 比預期簡單",
+                "data": f"action=reply&task={task_id if subtask_id is None else task_id + '&subtask=' + subtask_id}&offset=-1",
+                "displayText": "做起來比預計的還要簡單些。👌"
+                },
+                "color": "#8BC34A"
+            },
+            {
+                "type": "button",
+                "action": {
+                "type": "postback",
+                "label": "🎯 估得很準！",
+                "data": f"action=reply&task={task_id if subtask_id is None else task_id + '&subtask=' + subtask_id}&offset=0",
+                "displayText": "特助估計得很準確喔，辛苦了！🎯"
+                },
+                "style": "primary",
+                "height": "sm",
+                "color": "#9E9E9E"
+            },
+            {
+                "type": "button",
+                "action": {
+                "type": "postback",
+                "label": "💦 稍微有點累",
+                "data": f"action=reply&task={task_id if subtask_id is None else task_id + '&subtask=' + subtask_id}&offset=+1",
+                "displayText": "呼，實際做起來稍微有點累人。💦"
+                },
+                "style": "secondary",
+                "color": "#FF9800",
+                "height": "sm"
+            },
+            {
+                "type": "button",
+                "action": {
+                "type": "postback",
+                "label": "😵‍💫 比想像中硬",
+                "data": f"action=reply&task={task_id if subtask_id is None else task_id + '&subtask=' + subtask_id}&offset=+2",
+                "displayText": "這項任務比預期中還要硬很多... 😵‍💫"
+                },
+                "style": "secondary",
+                "height": "sm",
+                "color": "#F44336"
+            }
+            ],
+            "flex": 0
+        }
+    }
+    if mode == "task" :
+        message = FlexMessage(alt_text="任務完成回饋", contents=FlexContainer.from_dict(template))
+    request = ReplyMessageRequest(reply_token=reply_token, messages=[message])
+    line_bot.reply_message(request)
