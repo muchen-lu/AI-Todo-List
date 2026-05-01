@@ -10,7 +10,7 @@ from ui import ModernTaskUI, HotkeySignal, TaskCatchConfirmationUI, LoadingWidge
 from models import TodoItem
 from line_notifier import send_line_notification
 from task_catcher import get_classroom, get_ono
-from database_manager import push_data, get_data
+from database_manager import push_task, get_tasks
 import keyboard
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
@@ -84,7 +84,7 @@ def main() :
 def on_fetch_done(tasks: list[TodoItem]) :
     global confirm_window, loading_win
     loading_win.stop()
-    existing_tasks = get_data()
+    existing_tasks = get_tasks()
     
     existing_titles = {task.title for task in existing_tasks}
     
@@ -99,7 +99,7 @@ def on_fetch_done(tasks: list[TodoItem]) :
                 subtasks = generate_subtasks(task["task"])
                 task["task"].subtasks = subtasks
             task["task"] = eliminate_point(task["task"])
-            push_data(task["task"])
+            push_task(task["task"])
     
     confirm_window.confirmed_tasks.connect(lambda tasks: process_task(tasks))
 

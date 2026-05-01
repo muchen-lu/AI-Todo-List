@@ -16,7 +16,7 @@ def push_task(data: TodoItem) :
         data (TodoItem): 資料本體，以 TodoItem 資料建模處理
     """
     try :
-        ref.child("tasks").child(data.id).set({"title": data.title, "deadline": data.deadline, "subtasks": [subtask.__dict__ for subtask in data.subtasks] if data.subtasks else None})
+        ref.child("tasks").child(data.id).set({"title": data.title, "deadline": data.deadline, "expect_point": data.expect_point, "subtasks": [subtask.__dict__ for subtask in data.subtasks] if data.subtasks else None})
     except Exception as e :
         raise Exception(f"推送上資料庫失敗：{e}")
 
