@@ -1,6 +1,10 @@
 import firebase_admin
 from firebase_admin import credentials, db
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from models import TodoItem
 
 cred = credentials.Certificate("firebase_key.json")
@@ -34,12 +38,12 @@ def get_tasks(task_id: str = None) -> list[TodoItem] :
             data = ref.child("tasks").child(task_id).get()
             if data is None :
                 return []
-            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), expect_point=data.get("expect_point"), subtasks=[TodoItem(id=subtask_id, title=subtask["title"], deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()])]
+            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), expect_point=data.get("expect_point"), subtasks=[TodoItem(id=subtask_id, title=subtask.get("title"), deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()])]
         else :
             data = ref.child("tasks").get()
             if data is None :
                 return []
-            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), expect_point=data.get("expect_point"), subtasks=[TodoItem(id=subtask_id, title=subtask["title"], deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()])]
+            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), expect_point=data.get("expect_point"), subtasks=[TodoItem(id=subtask_id, title=subtask.get("title"), deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()]) for task_id, data in data.items()]
     except Exception as e :
         raise Exception(f"從資料庫獲取資料失敗：{e}")
 
@@ -86,3 +90,6 @@ def get_history(file: str) -> dict :
         return data
     except Exception as e :
         raise Exception(f"從資料庫獲取資料失敗：{e}")
+
+if __name__ == "__main__" :
+    print(get_tasks())
