@@ -159,7 +159,7 @@ def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs)
         mode (Literal["task", "notification"]): 回覆類型
         reply_token (str): Line 的 reply token
     """
-    if mode == "task" and "title" not in kargs or "expect_point" or kargs or "task_id" not in kargs :
+    if mode == "task" and ("title" not in kargs or "expect_point" not in kargs or "task_id" not in kargs) :
         raise ValueError("回覆任務訊息時必須提供 title、expect_point 以及 task_id 或 subtask_id")
     title = kargs.get("title")
     expect_point = kargs.get("expect_point")
