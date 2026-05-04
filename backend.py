@@ -57,7 +57,6 @@ def handle_postback(event) :
     task = get_tasks(task_id=task_id)[0]
     
     if action == "complete" :
-        print(f"完成任務：{task.title}，預期點數：{task.expect_point}，任務 ID：{task_id}，子任務 ID：{subtask_id}")
         reply_user("task", reply_token, title = task.title, expect_point = task.expect_point, task_id = task_id, subtask_id = subtask_id)
     elif action == "reply" :
         used_point = max(0, min(10, int(task.expect_point) + int(params.get("offset", 0)))) # 確保最終的 used_point 在 0~10 之間
