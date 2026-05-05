@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 from models import TodoItem, SubtaskItem
 from calendar_catcher import get_calendar_events
+from database_manager import get_history
 
 load_dotenv()
 
@@ -14,11 +15,25 @@ model = genai.GenerativeModel("gemini-3-flash-preview")
 def eliminate_point(task: TodoItem) -> TodoItem | SubtaskItem :
     """利用 AI 估計任務所需能量，並將其轉化為 0~10 的 expect_point"""
     
+    def history_file() -> list[str] :
+        now = datetime.now()
+        year = now.year
+        month = now.month
+        match month :
+            case month if month in [1, 2, 3] :
+                return [f"{year-1}_Q4", f"{year}_Q1"]
+            case month if month in [4, 5, 6] :
+                return [f"{year}_Q1", f"{year}_Q2"]
+            case month if month in [7, 8, 9] :
+                return [f"{year}_Q2", f"{year}_Q3"]
+            case month if month in [10, 11, 12] :
+                return [f"{year}_Q3", f"{year}_Q4"]
+    
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
     calendar_context = get_calendar_events()
     prompt = f"""
     你是一名高階行政特助，專長是評估學習負擔。
-    請根據以下任務清單，自動估算其 energy_load (1-10 分)。
+    請根據以下任務清單及使用者過去的任務耗能記錄，自動估算其 energy_load (1-10 分)。
     
     <使用者特質>
     - 高中生，流行音樂社社長(鼓手)、資研社副社長、學生會學權部部長。
@@ -58,6 +73,10 @@ def eliminate_point(task: TodoItem) -> TodoItem | SubtaskItem :
     <待估算任務>
     {task}
     </待估算任務>
+    
+    <任務紀錄>
+    {"".join(get_history(file) for file in history_file())}
+    </任務紀錄>
 
     <回覆格式限制>
     僅回傳 JSON，結構如下，若待估算任務中含有 parent 鍵與值則附上，否則不用 parent 鍵與值：
