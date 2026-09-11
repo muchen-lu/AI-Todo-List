@@ -31,7 +31,7 @@ if not creds or not creds.valid:
 # 建立 Calendar 工具連線
 service = build("calendar", "v3", credentials=creds)
 
-def get_calendar_events() -> list[dict] :
+def get_calendar_events() -> list[CalendarEvent] :
     """抓取從當日到當周六的事件"""
     global service
     tz = pytz.timezone('Asia/Taipei')

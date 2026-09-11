@@ -5,7 +5,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import datetime
 from playwright.sync_api import Playwright, sync_playwright, expect
-from models import TodoItem, GCItem
+from models import TodoItem, ONOItem, GCItem
 from ai_client import eliminate_point
 
 # 更新權限範圍
@@ -58,8 +58,9 @@ def get_ono() -> list[TodoItem]:
         for item in items :
             title = item.locator(".title-text span").inner_text().strip()
             deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
-            # item = eliminate_point(item)
-            tasks.append(TodoItem(title = title, deadline = deadline))
+            task = ONOItem(title = title, deadline = deadline)
+            task = TodoItem(title = task.title, deadline = task.deadline, estimate_data = eliminate_point(task))
+            tasks.append(task)
 
         # ---------------------
         context.close()
@@ -93,12 +94,12 @@ def get_classroom() -> list[TodoItem] :
                     homework = homeworks[i]
                     # print(homework)
                     homework = GCItem(**homework)
-                    # homework = eliminate_point(homework)
-                    tasks.append(TodoItem(title = homework.title, deadline = homework.deadline))
+                    task = TodoItem(title = homework.title, deadline = homework.deadline, estimate_data = eliminate_point(homework))
+                    tasks.append(task)
 
     return tasks
 
-if __name__ == "__main__" :
-    tasks = get_ono()
-    for task in tasks :
-        print(task.title, task.deadline, task.expect_point)
+# if __name__ == "__main__" :
+#     tasks = get_ono()
+#     for task in tasks :
+#         print(task.title, task.deadline, task.expect_point)

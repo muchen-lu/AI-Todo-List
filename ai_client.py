@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import json
 from datetime import datetime
-from models import TodoItem, SubtaskItem
+from models import TodoItem, SubtaskItem, ONOItem, GCItem, EstimateData, CalendarEvent
 from calendar_catcher import get_calendar_events
 from database_manager import get_history
 
@@ -12,7 +12,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-3-flash-preview")
 
-def eliminate_point(task: TodoItem) -> TodoItem | SubtaskItem :
+def eliminate_data(task: ONOItem | GCItem) -> EstimateData:
     """利用 AI 估計任務所需能量，並將其轉化為 0~10 的 expect_point"""
     
     def history_file() -> list[str] :
@@ -30,128 +30,150 @@ def eliminate_point(task: TodoItem) -> TodoItem | SubtaskItem :
                 return [f"{year}_Q3", f"{year}_Q4"]
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
-    calendar_context = get_calendar_events()
+    # calendar_context = get_calendar_events()
+
     prompt = f"""
-    你是一名高階行政特助，專長是評估學習負擔。
-    請根據以下任務清單及使用者過去的任務耗能記錄，自動估算其 energy_load (1-10 分)。
-    
-    <使用者特質>
-    - 高中生，流行音樂社社長(鼓手)、資研社副社長、學生會學權部部長。
-    - 擅長程式。
-    </使用者特質>
+        # 角色與目標
+        你是一位專業的時間管理與工作排程分析師，擅長拆解工作本質、評估注意力成本，並為任務安排最佳執行模式。請依據輸入的「任務名稱」與「截止時間」，完成多維度分析並回傳結構化評估。
 
-    <評估準則>
-    - [1分] 微量：單純點擊、查看、轉傳，不需思考。
-    - [3分] 輕量：熟練的例行公事 (SOP)，不需對照外部資料。
-    - [5分] 中量：需專注 45-60 分鐘的產出，邏輯路徑清晰。
-    - [7分] 重量：需深度專注 2 小時以上，涉及多模組整合。
-    - [9分] 極限：全天候抗戰，身心高度緊繃。
-    - 禁止「詞彙溢價」：不要看到『自述、期末、專案』就給高分，必須根據後綴（架構、草稿、練習）進行減分。
-    - 禁止「全高分偏誤」：在處理子任務 (Subtasks) 時，必須展現階梯感。讀取類 (Read) 一律比寫入類 (Write) 低 2-3 分。
-    </評估準則>
-    
-    <+1 因子判定>
-    - [+1 糾錯因子]：涉及 Debug、重構 (Refactor) 或邏輯除錯。
-    - [+1 檢索因子]：需要頻繁翻找文件、對照外部 API 或處理外語。
-    - [+1 風險因子]：操作具有不可逆性 (如修改資料庫 Schema、發布正式版)。
-    - [+1 弱項因子]：任務標題明確涉及使用者不擅長的學科。
-    </+1 因子判定>
-    
-    <定錨對照組 - 請嚴格參考此標準>
-    1. 標題：[數學] 習題 1-1
-    - 估分：5 (基準點：需專注 40-60 分鐘)
-    2. 標題：學習歷程自述架構-課堂練習
-    - 估分：3 (原因：僅為「架構」與「練習」，不具備最終產出壓力)
-    3. 標題：英文單字 L4 測驗
-    - 估分：6 (原因：例行性小考)
-    4. 標題：社團練團通知發送
-    - 估分：1 (原因：單純的操作性雜事)
-    5. 標題：[自主學習] 程式專案開發 - 登入功能實作
-    - 估分：7 (原因：高強度邏輯思考與實作)
-    </定錨對照組 - 請嚴格參考此標準>
+        ---
 
-    <待估算任務>
-    {task}
-    </待估算任務>
-    
-    <任務紀錄>
-    {"".join(get_history(file) for file in history_file())}
-    </任務紀錄>
+        # 輸入參數
+        - **任務名稱**：{task.title}
+        - **截止時間**：{task.deadline}
 
-    <回覆格式限制>
-    僅回傳 JSON，結構如下，若待估算任務中含有 parent 鍵與值則附上，否則不用 parent 鍵與值：
-    {{"parent": "父任務 ID", "id": "任務 ID", "title": "任務標題", "deadline": "YYYY-MM-DD HH:mm", "expect_point": 數字}},
-    </回覆格式限制>
+        ---
+
+        # 評估維度與準則
+
+        1. **任務類型（Task Type）**：請從下列選項中精確比對最符合的一項：
+        - writing(撰寫報告、文案發想、企劃書撰寫)
+        - design(Logo 設計、UI 排版、簡報視覺設計)
+        - development(程式開發、修復問題、重構程式碼)
+        - communication(回覆信件、即時訊息溝通、電話聯繫)
+        - meeting(內部同步會議、客戶提案會議、跨部門討論)
+        - research(市場調查、資料蒐集、數據分析)
+        - planning(專案時程規劃、策略制定、架構設計)
+        - admin(表單申請、單據報銷、例行文件歸檔)
+        - review(校對文件、程式碼審查、QA 測試)
+        - learning(閱讀書籍、線上課程學習、新技術研究)
+        - other(無法歸類的任務,保底選項)
+
+        2. **認知負載度（Cognitive Load）**：
+        - 評級：1~5（1=低，5=高）
+        - 判斷依據：評估該任務所需的心智專注力、決策複雜度、邏輯抽象度以及上下文切換成本。
+
+        3. **預計耗時（Estimated Duration）**：
+        - 單位為**分鐘**（整數數值，如 30、45、90，且最低可到 1）。
+        - 請基於常規專業人員標準產出速度進行預估，若任務過大，請估算完成最小可行階段所需的分鐘數。
+
+        4. **執行模式（Execution Mode）**：
+        - **深度工作**：認知負載為「中」或「高」，且預計耗時通常 $\ge$ 45 分鐘，需連貫專注、抗干擾的狀態。
+        - **零碎時間**：認知負載為「低」，或耗時 $\le$ 30 分鐘，中斷重啟成本低，可利用零散空檔處理。
+
+        5. **評估信心度（Confidence Level）**：
+        - 評級：0~1（0=完全不確定，1=非常確定）
+        - 判定標準：依據「任務名稱的明確度」與「潛在不確定性」進行評估。
+
+        ---
+
+        # 輸出格式
+        請統一以 JSON 格式輸出，無須包含多餘前言或結尾廢話：
+
+        {{
+        "task_name": "任務名稱",
+        "deadline": "截止時間",
+        "task_category": "任務類別",
+        "cognitive_load": 1~5,
+        "estimated_duration_minutes": 60,
+        "execution_mode": "deep" | "shallow",
+        "confidence": 0.85
+        }}
     """
     response = model.generate_content(prompt).text.replace("```json", "").replace("```", "").strip()
     print(response)
     try :
         task = json.loads(response)
-        if "parent" in task :
-            return SubtaskItem(parent = task["parent"], id = task["id"], title = task["title"], deadline = task["deadline"], expect_point = task["expect_point"])
-        else :
-            return TodoItem(id = task["id"], title = task["title"], deadline = task["deadline"], expect_point = task["expect_point"])
+        return EstimateData(
+            task_category = task["task_category"],
+            congnitive_load = task["cognitive_load"],
+            estimated_time = task["estimated_duration_minutes"],
+            suggest_work_mode = task["execution_mode"],
+            confidence = task["confidence"]
+        )
     except Exception as e :
         raise Exception(f"解析模型回覆失敗：{e}")
 
-def get_5_tasks(datas: list[TodoItem]) -> list[TodoItem] :
+def suggest_tasks(datas: list[TodoItem], calendar: list[CalendarEvent]) -> list[TodoItem] :
     """從現有任務中，篩選代辦 5 件事情
 
     Args:
         datas (list[TodoItem]): 現有任務
+        calendar (list[CalendarEvent]): 今日行程安排
 
     Returns:
         list[TodoItem]: 今日代辦五件事
     """
-    datas = [{"id": data.id, "title": data.title, "deadline": data.deadline} for data in datas]
+    # datas = [{"id": data.id, "title": data.title, "deadline": data.deadline} for data in datas]
     
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
-    calendar_context = get_calendar_events()
-    calendar_context = [{"title": event.title, "today": event.today, "long": event.long} for event in calendar_context]
+    # calendar_context = get_calendar_events()
+    # calendar_context = [{"title": event.title, "today": event.today, "start": event.start, "end": event.end} for event in calendar_context]
+    ai_datas = [data.model_dump_json() for data in datas]
+    calendar = [event.model_dump_json() for event in calendar]
     prompt = f"""
-    <角色>
-    你是一名擁有 10 年經驗、專精於「動態負載平衡」的高階行政特助。你擅長結合使用者的生活節奏（日曆）與任務難度（能量）來安排日程，確保使用者在達成目標的同時，能保有完全的休息品質。
-    </角色>
+    # 角色定位
+    你是一位「高階動態排程架構師與個人生產力教練」，專精於容量規劃（Capacity Planning）、認知精力分配與平準化工作流（Workload Leveling）。你的目標是協助使用者在高產能、平穩步調與健康休息之間取得最佳平衡。
 
-    <背景資訊>
-    現在時間：{current_time}
-    </背景資訊>
+    ---
 
-    <日曆情境 (即日起至週六)>
-    {calendar_context}
-    </日曆情境>
+    # 輸入參數
 
-    <任務篩選邏輯>
-    1. 週六清零原則：若任務之真實截止日 (Deadline) 在「下週三 (含) 以前」，請視其為高優先級，必須安排在週六 23:59 前完成。
-    2. 能量負載平衡：
-    - 參考 <日曆情境>：若當日已有長時間行程（如練團、上課），請調降今日可分配的 energy_load 總額。
-    - 每日天花板：無論日曆多空，今日派發任務的 energy_load 總和嚴格禁止超過 30 點，且任務總數量不得超過 5 個。
-    3. 前置化策略：優先將紅區任務往前安排，避免週六出現任務大噴發。
-    </任務篩選邏輯>
+    ### 1. 現有任務清單（Task Pool）
+    請列出所有待辦事項（包含任務名稱、截止日、預估耗時、認知負荷等）：
+    {ai_datas}
 
-    <現有任務>
-    {datas}
-    </現有任務>
+    ### 2. 今日行程安排（Today's Context）
+    - **排程時間基準窗口**：固定為每日 **08:00 ~ 12:00**、**13:30~18:00** 與 **20:00~22:00**（此範圍外為睡眠與個人生活防護時段，一律不排工作）。
+    {calendar}
 
-    <回覆格式限制>
-    1. 僅回傳 JSON：不要包含任何解釋、代碼塊標籤或開場白。
-    2. 結構要求：
+    ---
+
+    # 排程核心原則與硬性限制
+
+    1. **零工週日守則（Sunday Rest Rule - 絕對硬性限制）**：
+    - 週日一律不准安排任何工作或任務。
+    - 所有截止日臨近週末的任務，必須強制提前至週五或週六前消化完畢，絕不延後至週日。
+
+    2. **工作量平準化（Workload Leveling）**：
+    - 拒絕「前幾天閒散、壓線當天通宵爆肝」的現象。
+    - 以長線眼光拆解遠期任務，平均攤提至每日日常，單日任務總預估工時嚴禁超過「可用專注工時」的 65%（保留 35% 緩衝應對突發狀況）。
+
+    3. **精力與時段匹配（Energy Matching）**：
+    - 「深度工作」排入今日未被打斷的連續大時段；「零碎任務」填入會議間隙或精神較疲乏的時段。
+
+    4. **餘力前置拉動（Proactive Pull-Forward）**：
+    - 若評估今日固定行程少、專注餘裕充足，**主動從未來清單挑選 1–2 項高價值或高阻力的中長線任務進行提前推進**（哪怕只是完成前置調研或草稿），建立心理安全感。
+
+    ---
+
+    # 輸出格式規範
+    必須一律以標準 **JSON** 格式輸出，不得包含任何 Markdown 前言或後記廢話。JSON 結構如下：
+
     {{
-        "id": "任務唯一識別碼",
-        "title": "任務標題",
-        "deadline": "YYYY-MM-DD HH:mm",
-        "expect_point": 0~10
+    "capacity_minutes": 300 # 今日可用專注工時，單位為分鐘
+    "today_selected_tasks": [0, 2, 5] # 今日代辦任務索引，對應於輸入的現有任務清單（Task Pool）中的索引位置
     }}
-    </回覆格式限制>
     """
     response = model.generate_content(prompt).text.replace("```json", "").replace("```", "").strip()
     print(response)
     try :
         tasks = json.loads(response)
-        return [TodoItem(id = task["id"], title = task["title"], deadline = task["deadline"], expect_point = task["expect_point"]) for task in tasks]
+        return [datas[i] for i in tasks["today_selected_tasks"]]
     except Exception as e :
         raise Exception(f"解析模型回覆失敗：{e}")
 
+# TODO: 需要實作這個內容
 def generate_subtasks(task: TodoItem) -> list[SubtaskItem] :
     """為任務生成合適的子任務
 
@@ -208,9 +230,9 @@ def generate_subtasks(task: TodoItem) -> list[SubtaskItem] :
     except Exception as e :
         raise Exception(f"解析模型回覆失敗：{e}")
 
-if __name__ == "__main__" :
-    task = TodoItem(title = "程式交易歷史紀錄功能實作", deadline = "2026-04-30 20:00")
-    tasks = generate_subtasks(task)
-    for task in tasks :
-        task = eliminate_point(task)
-        print(task)
+# if __name__ == "__main__" :
+#     task = TodoItem(title = "程式交易歷史紀錄功能實作", deadline = "2026-04-30 20:00")
+#     tasks = generate_subtasks(task)
+#     for task in tasks :
+#         task = eliminate_point(task)
+#         print(task)
