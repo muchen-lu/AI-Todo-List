@@ -13,7 +13,7 @@ from database_manager import push_task, get_tasks
 from ai_client import suggest_tasks
 from calendar_catcher import get_calendar_events
 
-temp_task = [TodoItem(id="temp", title="暫存任務", deadline=None)]
+temp_task = []
 
 def main(timing: Literal["morning", "night"]) :
     global temp_task
@@ -21,9 +21,11 @@ def main(timing: Literal["morning", "night"]) :
         existing_tasks = get_tasks()
         todo = suggest_tasks(existing_tasks, get_calendar_events())
         temp_task = todo
-        send_line_notification(todo, "night")
+        if todo :
+            send_line_notification(todo, "night")
     else :
-        send_line_notification(temp_task, "morning")
+        if temp_task :
+            send_line_notification(temp_task, "morning")
 
 if __name__ == "__main__" :
     tw_tz = pytz.timezone('Asia/Taipei')

@@ -1,12 +1,13 @@
 import sys
+from typing import get_args
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, 
     QLineEdit, QPushButton, QLabel, QDateEdit, QTimeEdit, 
-    QCheckBox, QScrollArea, QFrame
+    QCheckBox, QScrollArea, QFrame, QComboBox, QSpinBox
 )
 from PyQt6.QtCore import Qt, QDate, QTime, pyqtSignal, QObject, QTimer, QRectF
 from PyQt6.QtGui import QPainter, QColor, QPen, QFont
-from models import TodoItem, SubtaskItem
+from models import TodoItem, SubtaskItem, EstimateData
 
 # --- 現代感通用樣式表 ---
 MODERN_STYLE = """
@@ -21,12 +22,21 @@ MODERN_STYLE = """
         font-size: 14px; 
         font-weight: bold; 
     }
-    QLineEdit, QDateEdit, QTimeEdit {
+    QLineEdit, QDateEdit, QTimeEdit, QComboBox, QSpinBox {
         background-color: rgba(255, 255, 255, 15);
         border: 1px solid rgba(255, 255, 255, 30);
         border-radius: 6px;
         padding: 6px;
         color: white;
+    }
+    QComboBox::drop-down {
+        border: none;
+    }
+    QComboBox QAbstractItemView {
+        background-color: rgb(35, 35, 35);
+        color: white;
+        selection-background-color: #3F51B5;
+        border: 1px solid rgba(255, 255, 255, 30);
     }
     QCheckBox { 
         color: #90CAF9; 
@@ -58,6 +68,30 @@ MODERN_STYLE = """
         border-radius: 4px;
     }
 """
+
+# --- 從 models.py 動態取出 Literal 選項，避免兩邊選項不同步 ---
+CATEGORY_OPTIONS = list(get_args(EstimateData.model_fields['task_category'].annotation))
+WORK_MODE_OPTIONS = list(get_args(EstimateData.model_fields['suggest_work_mode'].annotation))
+
+CATEGORY_LABELS = {
+    "writing": "✍️ 寫作",
+    "design": "🎨 設計",
+    "development": "💻 開發",
+    "communication": "💬 溝通",
+    "meeting": "🤝 會議",
+    "research": "🔬 研究",
+    "planning": "📋 規劃",
+    "admin": "🗂️ 行政",
+    "review": "🔍 審查",
+    "learning": "📚 學習",
+    "other": "🔹 其他",
+}
+
+WORK_MODE_LABELS = {
+    "deep": "🧠 深度工作",
+    "shallow": "☕ 淺層工作",
+}
+
 
 class HotkeySignal(QObject):
     triggered = pyqtSignal()
@@ -171,21 +205,37 @@ class ModernTaskUI(QWidget):
 
 # --- 2. 外部任務抓取確認介面 ---
 class TaskCatchConfirmationUI(QWidget):
-    # 確認後發送：List[dict] 包含 title, deadline, should_split
+    # 確認後發送：List[dict] 包含 task, should_split
     confirmed_tasks = pyqtSignal(list)
 
     def __init__(self, raw_tasks):
         super().__init__()
-        self.raw_tasks = raw_tasks # 格式：[{'title': '...', 'deadline': '...'}, ...]
+        self.raw_tasks = raw_tasks # 格式：List[TodoItem]
         self.task_rows = []
         self.old_pos = None
         self.init_ui()
 
+    def _make_estimate_updater(self, task, category_combo, load_spin, time_spin, mode_combo):
+        """
+        回傳一個綁定好當下 task 與元件的更新函式。
+        每次使用者調整任一欄位，就會即時把新值寫回 task.estimate_data。
+        """
+        def updater(*_args):
+            task.estimate_data = EstimateData(
+                task_category=category_combo.currentData(),
+                congnitive_load=load_spin.value(),
+                estimated_time=time_spin.value(),
+                suggest_work_mode=mode_combo.currentData(),
+                confidence=task.estimate_data.confidence  # AI 自評信心值維持不變
+            )
+        return updater
+
+    
     def init_ui(self):
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.Tool)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setFixedWidth(500)
-        self.setMaximumHeight(600) # 防止任務太多超出螢幕
+        self.setFixedWidth(560)
+        self.setMaximumHeight(650) # 防止任務太多超出螢幕
 
         main_vbox = QVBoxLayout(self)
         self.container = QWidget()
@@ -209,33 +259,114 @@ class TaskCatchConfirmationUI(QWidget):
         self.scroll_layout.setSpacing(10)
 
         for task in self.raw_tasks:
+            estimate_data = task.estimate_data
             row_frame = QFrame()
-            row_frame.setStyleSheet("background: rgba(255, 255, 255, 5); border-radius: 10px; border: 1px solid rgba(255,255,255,10);")
-            row_layout = QHBoxLayout(row_frame)
-            
+            row_frame.setProperty("TodoItem", task)
+            row_frame.setStyleSheet(
+                "background: rgba(255, 255, 255, 5); border-radius: 10px; border: 1px solid rgba(255,255,255,10);"
+            )
+
+            row_vbox = QVBoxLayout(row_frame)
+            row_vbox.setContentsMargins(10, 10, 10, 10)
+            row_vbox.setSpacing(8)
+
+            # ---- 上半部：基本資訊 ----
+            top_row = QHBoxLayout()
             add_cb = QCheckBox("加入")
             add_cb.setChecked(True)
-            
+
             info_vbox = QVBoxLayout()
             t_label = QLabel(task.title)
             t_label.setWordWrap(True)
             t_label.setStyleSheet("font-size: 13px; color: #FFFFFF;")
-            
+
             d_label = QLabel(f"📅 {task.deadline or '無期限'}")
             d_label.setStyleSheet("font-size: 11px; color: #B0BEC5; font-weight: normal;")
-            
+
             info_vbox.addWidget(t_label)
             info_vbox.addWidget(d_label)
-            
+
             split_cb = QCheckBox("AI 拆解")
             split_cb.setObjectName("AISplit")
+
+            top_row.addWidget(add_cb)
+            top_row.addLayout(info_vbox, 1)
+            top_row.addWidget(split_cb)
+            row_vbox.addLayout(top_row)
+
+            # ---- 分隔線 ----
+            divider = QFrame()
+            divider.setFixedHeight(1)
+            divider.setStyleSheet("background-color: rgba(255,255,255,20);")
+            row_vbox.addWidget(divider)
+
+            # ---- 下半部：AI 評估資訊（使用者可調整） ----
+            estimate_row = QHBoxLayout()
+            estimate_row.setSpacing(6)
+
+            category_combo = QComboBox()
+            for key in CATEGORY_OPTIONS:
+                category_combo.addItem(CATEGORY_LABELS.get(key, key), key)
+            idx = category_combo.findData(estimate_data.task_category)
+            if idx >= 0:
+                category_combo.setCurrentIndex(idx)
+
+            load_spin = QSpinBox()
+            load_spin.setRange(1, 5)
+            load_spin.setValue(estimate_data.congnitive_load)
+            load_spin.setPrefix("負荷 ")
+
+            time_spin = QSpinBox()
+            time_spin.setRange(1, 999)
+            time_spin.setSingleStep(5)
+            time_spin.setValue(estimate_data.estimated_time)
+            time_spin.setSuffix(" 分")
+
+            mode_combo = QComboBox()
+            for key in WORK_MODE_OPTIONS:
+                mode_combo.addItem(WORK_MODE_LABELS.get(key, key), key)
+            idx = mode_combo.findData(estimate_data.suggest_work_mode)
+            if idx >= 0:
+                mode_combo.setCurrentIndex(idx)
+
+            confidence_label = QLabel(f"信心 {estimate_data.confidence * 100:.0f}%")
+            confidence_label.setStyleSheet("font-size: 11px; color: #FFB74D; font-weight: normal;")
+
+            estimate_row.addWidget(category_combo)
+            estimate_row.addWidget(load_spin)
+            estimate_row.addWidget(time_spin)
+            estimate_row.addWidget(mode_combo)
+            estimate_row.addWidget(confidence_label)
             
-            row_layout.addWidget(add_cb)
-            row_layout.addLayout(info_vbox, 1)
-            row_layout.addWidget(split_cb)
-            
+            # ---- 即時同步：使用者調整後立刻寫回 task.estimate_data ----
+            estimate_updater = self._make_estimate_updater(
+                task, category_combo, load_spin, time_spin, mode_combo
+            )
+            category_combo.currentIndexChanged.connect(estimate_updater)
+            load_spin.valueChanged.connect(estimate_updater)
+            time_spin.valueChanged.connect(estimate_updater)
+            mode_combo.currentIndexChanged.connect(estimate_updater)
+
             self.scroll_layout.addWidget(row_frame)
-            self.task_rows.append({'add': add_cb, 'split': split_cb, 'data': task})
+            self.task_rows.append({
+                'add': add_cb,
+                'split': split_cb,
+                'data': task,
+            })
+
+
+            row_vbox.addLayout(estimate_row)
+
+            self.scroll_layout.addWidget(row_frame)
+            self.task_rows.append({
+                'add': add_cb,
+                'split': split_cb,
+                'data': task,
+                'category': category_combo,
+                'load': load_spin,
+                'time': time_spin,
+                'mode': mode_combo,
+            })
 
         scroll.setWidget(scroll_content)
         layout.addWidget(scroll)
@@ -256,16 +387,16 @@ class TaskCatchConfirmationUI(QWidget):
 
         main_vbox.addWidget(self.container)
 
-    def submit_all(self) :
+    def submit_all(self):
         self.hide()
         results = []
         for row in self.task_rows:
             if row['add'].isChecked():
                 results.append({
-                    'task': TodoItem(title=row['data'].title, deadline=row['data'].deadline),
+                    'task': row['data'],  # estimate_data 已經是即時更新過的最新版本
                     'should_split': row['split'].isChecked()
                 })
-        
+
         if results:
             self.confirmed_tasks.emit(results)
 
@@ -324,7 +455,6 @@ class LoadingWidget(QWidget):
         painter.drawRoundedRect(self.rect().adjusted(5, 5, -5, -5), 20, 20)
         
         # 2. 繪製旋轉中的圓弧
-        # 設定圓弧範圍
         spinner_rect = QRectF(60, 45, 100, 100)
         pen = QPen(QColor(129, 212, 250)) # 天藍色
         pen.setWidth(6)
@@ -332,30 +462,58 @@ class LoadingWidget(QWidget):
         painter.setPen(pen)
         
         # 繪製一段 120 度的弧線，角度隨 self.angle 變化
-        # 注意：drawArc 的角度單位是 1/16 度
         painter.drawArc(spinner_rect, -self.angle * 16, 120 * 16)
         
         # 3. 繪製中間文字
         painter.setPen(QColor("#F0F0F0"))
         painter.setFont(QFont("Microsoft JhengHei", 12, QFont.Weight.Bold))
-        # 文字稍微往下偏移一點，不要擋到圓弧中心
         painter.drawText(self.rect().adjusted(0, 150, 0, 0), Qt.AlignmentFlag.AlignHCenter, "任務抓取中...")
 
 # --- 測試代碼 ---
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
+# if __name__ == "__main__":
+#     app = QApplication(sys.argv)
     
-    # 測試手動輸入介面
-    # window = ModernTaskUI()
-    # window.show()
+#     # 測試手動輸入介面
+#     # window = ModernTaskUI()
+#     # window.show()
     
-    # 測試確認抓取介面
-    test_tasks = [
-        {'title': '數學 1-1 非同步筆記', 'deadline': '2026-04-03 23:59'},
-        {'title': '鹿港乘桴記課文研讀', 'deadline': '2026-04-05 12:00'},
-        {'title': '製作期末專案報告 (大型)', 'deadline': '2026-04-20 17:00'}
-    ]
-    confirm_win = TaskCatchConfirmationUI(test_tasks)
-    confirm_win.show()
+#     # 測試確認抓取介面（改用真正的 TodoItem，符合 init_ui 內的屬性存取方式）
+#     test_tasks = [
+#         TodoItem(
+#             title="數學 1-1 非同步筆記",
+#             deadline="2026-04-03 23:59",
+#             estimate_data=EstimateData(
+#                 task_category="learning",
+#                 congnitive_load=3,
+#                 estimated_time=45,
+#                 suggest_work_mode="shallow",
+#                 confidence=0.82
+#             )
+#         ),
+#         TodoItem(
+#             title="鹿港乘桴記課文研讀",
+#             deadline="2026-04-05 12:00",
+#             estimate_data=EstimateData(
+#                 task_category="research",
+#                 congnitive_load=4,
+#                 estimated_time=60,
+#                 suggest_work_mode="deep",
+#                 confidence=0.75
+#             )
+#         ),
+#         TodoItem(
+#             title="製作期末專案報告 (大型)",
+#             deadline="2026-04-20 17:00",
+#             estimate_data=EstimateData(
+#                 task_category="planning",
+#                 congnitive_load=5,
+#                 estimated_time=180,
+#                 suggest_work_mode="deep",
+#                 confidence=0.6
+#             )
+#         ),
+#     ]
+#     confirm_win = TaskCatchConfirmationUI(test_tasks)
+#     confirm_win.show()
     
-    sys.exit(app.exec())
+#     sys.exit(app.exec())

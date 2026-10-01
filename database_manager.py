@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from models import TodoItem
+from models import TodoItem, SubtaskItem
 
 cred = credentials.Certificate("firebase_key.json")
 firebase_admin.initialize_app(cred, {
@@ -20,7 +20,7 @@ def push_task(data: TodoItem) :
         data (TodoItem): 資料本體，以 TodoItem 資料建模處理
     """
     try :
-        ref.child("tasks").child(data.id).set({"title": data.title, "deadline": data.deadline, "expect_point": data.expect_point, "subtasks": [subtask.__dict__ for subtask in data.subtasks] if data.subtasks else None})
+        ref.child("tasks").child(data.id).set({"title": data.title, "deadline": data.deadline, "estimate_data": data.estimate_data.model_dump(), "subtasks": [subtask.__dict__ for subtask in data.subtasks] if data.subtasks else None})
     except Exception as e :
         raise Exception(f"推送上資料庫失敗：{e}")
 
@@ -38,12 +38,12 @@ def get_tasks(task_id: str = None) -> list[TodoItem] :
             data = ref.child("tasks").child(task_id).get()
             if data is None :
                 return []
-            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), expect_point=data.get("expect_point"), subtasks=[TodoItem(id=subtask_id, title=subtask.get("title"), deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()])]
+            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), estimate_data=data.get("estimate_data"), subtasks=[SubtaskItem(id=subtask_id, title=subtask.get("title"), deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()])]
         else :
             data = ref.child("tasks").get()
             if data is None :
                 return []
-            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), expect_point=data.get("expect_point"), subtasks=[TodoItem(id=subtask_id, title=subtask.get("title"), deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()]) for task_id, data in data.items()]
+            return [TodoItem(id=task_id, title=data["title"], deadline=data.get("deadline"), estimate_data=data.get("estimate_data"), subtasks=[SubtaskItem(id=subtask_id, title=subtask.get("title"), deadline=subtask.get("deadline")) for subtask_id, subtask in (data.get("subtasks") or {}).items()]) for task_id, data in data.items()]
     except Exception as e :
         raise Exception(f"從資料庫獲取資料失敗：{e}")
 

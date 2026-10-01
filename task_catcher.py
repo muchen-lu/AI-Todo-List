@@ -6,7 +6,7 @@ from googleapiclient.discovery import build
 import datetime
 from playwright.sync_api import Playwright, sync_playwright, expect
 from models import TodoItem, ONOItem, GCItem
-from ai_client import eliminate_point
+from ai_client import eliminate_data
 
 # 更新權限範圍
 SCOPES = [
@@ -31,10 +31,10 @@ if not creds or not creds.valid:
 # 建立 Classroom 工具連線
 service = build("classroom", "v1", credentials=creds)
 
-def get_ono() -> list[TodoItem]:
+def get_ono() -> list[ONOItem]:
     """使用爬蟲取得 ONO 上現有任務
     Returns:
-        list[TodoItem]: 任務列表，每個任務包含標題和截止日期
+        list[ONOItem]: 任務列表，每個任務包含標題和截止日期
     """
     tasks = []
     def run(playwright: Playwright) -> None :
@@ -50,7 +50,7 @@ def get_ono() -> list[TodoItem]:
         page.get_by_role("textbox", name="密碼").fill(os.getenv("ONO_PASSWORD"))
         page.get_by_role("button", name="登入", exact=True).click()
         # page.goto("https://ono.tp.edu.tw/user/index#/", wait_until="domcontentloaded")
-        page.wait_for_url("https://ono.tp.edu.tw/user/index#/")
+        page.wait_for_url("https://ono.tp.edu.tw/user/index#/", timeout = 0)
         page.wait_for_selector(".todo-list")
         
         items = page.locator(".todo-list").all()
@@ -59,7 +59,7 @@ def get_ono() -> list[TodoItem]:
             title = item.locator(".title-text span").inner_text().strip()
             deadline = item.locator("span:has-text('截止日期')").inner_text().replace("截止日期:", "").replace(".", "-").strip()
             task = ONOItem(title = title, deadline = deadline)
-            task = TodoItem(title = task.title, deadline = task.deadline, estimate_data = eliminate_point(task))
+            # task = TodoItem(title = task.title, deadline = task.deadline, estimate_data = eliminate_data(task))
             tasks.append(task)
 
         # ---------------------
@@ -71,11 +71,11 @@ def get_ono() -> list[TodoItem]:
     
     return tasks
 
-def get_classroom() -> list[TodoItem] :
+def get_classroom() -> list[GCItem] :
     """抓取 Google Classroom 代辦作業
 
     Returns:
-        list[TodoItem]: 作業列表，每個作業包含標題和截止日期
+        list[GCItem]: 作業列表，每個作業包含標題和截止日期
     """
     tasks = []
     courses = service.courses().list(courseStates='ACTIVE').execute()
@@ -94,8 +94,8 @@ def get_classroom() -> list[TodoItem] :
                     homework = homeworks[i]
                     # print(homework)
                     homework = GCItem(**homework)
-                    task = TodoItem(title = homework.title, deadline = homework.deadline, estimate_data = eliminate_point(homework))
-                    tasks.append(task)
+                    # task = TodoItem(title = homework.title, deadline = homework.deadline, estimate_data = eliminate_data(homework))
+                    tasks.append(homework)
 
     return tasks
 

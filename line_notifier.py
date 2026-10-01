@@ -55,6 +55,17 @@ l5_feedback = ["真的辛苦了！完成這項任務一定很累吧，快去休�
                "終於搞定了！特助很關心你現在的狀態，感覺如何？",
                "耗費這麼多能量辛苦了。這項魔王任務你實際給幾分？"]
 
+gold_star = {
+                "type": "icon",
+                "size": "sm",
+                "url": "https://developers-resource.landpress.line.me/fx/img/review_gold_star_28.png"
+            }
+gray_star = {
+                "type": "icon",
+                "size": "sm",
+                "url": "https://developers-resource.landpress.line.me/fx/img/review_gray_star_28.png"
+            }
+
 configuration = Configuration(access_token=LINE_CHANNEL_ACCESS_TOKEN)
 line_bot = MessagingApi(ApiClient(configuration))
 
@@ -79,43 +90,91 @@ def send_line_notification(tasks: List[TodoItem | SubtaskItem], timing: Literal[
                     "type": "box",
                     "layout": "vertical",
                     "contents": [
+                    {
+                        "type": "text",
+                        "text": task.title,
+                        "weight": "bold",
+                        "size": "xl"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "baseline",
+                        "contents": [
                         {
                             "type": "text",
-                            "text": task.title,
-                            "weight": "bold",
-                            "size": "xl",
-                            "wrap": True
+                            "text": "任務負荷",
+                            "position": "relative",
+                            "align": "start",
+                        },
+                        *(gold_star if i < task.estimate_data.congnitive_load else gray_star for i in range(5)),
+                        {
+                            "type": "text",
+                            "text": ("淺層" if task.estimate_data.suggest_work_mode == "shallow" else "深層"),
+                            "size": "sm",
+                            "color": "#999999",
+                            "margin": "md",
+                            "flex": 0
+                        },
+                        {
+                            "type": "text",
+                            "text": " "
+                        }
+                        ],
+                        "position": "relative",
+                        "margin": "md"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "margin": "lg",
+                        "spacing": "sm",
+                        "contents": [
+                        {
+                            "type": "box",
+                            "layout": "baseline",
+                            "spacing": "sm",
+                            "contents": [
+                            {
+                                "type": "text",
+                                "text": "Deadline",
+                                "color": "#aaaaaa",
+                                "size": "sm",
+                                "flex": 2
+                            },
+                            {
+                                "type": "text",
+                                "text": task.deadline,
+                                "wrap": True,
+                                "color": "#666666",
+                                "size": "sm",
+                                "flex": 5
+                            }
+                            ]
                         },
                         {
                             "type": "box",
-                            "layout": "vertical",
-                            "margin": "lg",
+                            "layout": "baseline",
                             "spacing": "sm",
                             "contents": [
-                                {
-                                    "type": "box",
-                                    "layout": "baseline",
-                                    "spacing": "sm",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": "Deadline",
-                                            "color": "#aaaaaa",
-                                            "size": "sm",
-                                            "flex": 2
-                                        },
-                                        {
-                                            "type": "text",
-                                            "text": task.deadline if task.deadline else "無",
-                                            "wrap": True,
-                                            "color": "#666666",
-                                            "size": "sm",
-                                            "flex": 4
-                                        }
-                                    ]
-                                }
+                            {
+                                "type": "text",
+                                "text": "Duration",
+                                "color": "#aaaaaa",
+                                "size": "sm",
+                                "flex": 2
+                            },
+                            {
+                                "type": "text",
+                                "text": str(task.estimate_data.estimated_time) + " min(s)",
+                                "wrap": True,
+                                "color": "#666666",
+                                "size": "sm",
+                                "flex": 5
+                            }
                             ]
                         }
+                        ]
+                    }
                     ]
                 },
                 "footer": {
@@ -123,22 +182,28 @@ def send_line_notification(tasks: List[TodoItem | SubtaskItem], timing: Literal[
                     "layout": "vertical",
                     "spacing": "sm",
                     "contents": [
-                        {
-                            "type": "button",
-                            "style": "primary", # 改為 primary 比較顯眼，你也可以用 link
-                            "height": "sm",
-                            "action": {
-                                "type": "postback", # 修正：要傳 data 必須用 postback，不能用 uri
-                                "label": "Complete",
-                                "data": f"action=complete&task={task.id if isinstance(task, TodoItem) else task.parent + '&subtask=' + task.id}",
-                                "displayText": f"完成「{task.title}」了！"
-                            },
-                            "color": "#06C755"
-                        }
+                    {
+                        "type": "button",
+                        "style": "primary",
+                        "height": "sm",
+                        "action": {
+                        "type": "postback",
+                        "label": "Complete",
+                        "data": f"action=complete&task={task.id if isinstance(task, TodoItem) else task.parent + '&subtask=' + task.id}",
+                        "displayText": f"完成「{task.title}」了！"
+                        },
+                        "color": "#06C755"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [],
+                        "margin": "sm"
+                    }
                     ],
                     "flex": 0
                 }
-            }
+                }
             task_message["contents"].append(template)
         task_message = FlexMessage(alt_text="你的任務清單", contents=FlexContainer.from_dict(task_message))
         messages.append(task_message)
@@ -279,3 +344,10 @@ def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs)
         message = FlexMessage(alt_text="任務完成回饋", contents=FlexContainer.from_dict(template))
     request = ReplyMessageRequest(reply_token=reply_token, messages=[message])
     line_bot.reply_message(request)
+
+if __name__ == "__main__" :
+    # 測試用
+    from models import TodoItem, EstimateData
+    test_task = TodoItem(title="測試任務", deadline="2024-06-30 23:59", estimate_data=EstimateData(confidence = 0.9, congnitive_load = 3, estimated_time = 30, suggest_work_mode = "shallow", task_category = "learning"))
+    send_line_notification([test_task], "night")
+    send_line_notification([test_task], "morning")

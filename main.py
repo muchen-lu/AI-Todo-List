@@ -14,7 +14,7 @@ from database_manager import push_task, get_tasks
 import keyboard
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
-from ai_client import generate_subtasks, eliminate_point
+from ai_client import generate_subtasks, eliminate_data
 
 
 def create_tray(app, window):
@@ -88,7 +88,8 @@ def on_fetch_done(tasks: list[TodoItem]) :
     
     existing_titles = {task.title for task in existing_tasks}
     
-    new_tasks = [task for task in tasks if task.title not in existing_titles]
+    new_tasks = [task for task in tasks if task.title not in existing_titles] # TODO: 這裡才讓 AI 評估，節省用量
+    new_tasks = [TodoItem(title = task.title, deadline = task.deadline, estimate_data = eliminate_data(task)) for task in new_tasks]
     
     confirm_window = TaskCatchConfirmationUI(new_tasks)
     confirm_window.show()
@@ -98,7 +99,6 @@ def on_fetch_done(tasks: list[TodoItem]) :
             if task["should_split"] :
                 subtasks = generate_subtasks(task["task"])
                 task["task"].subtasks = subtasks
-            task["task"] = eliminate_point(task["task"])
             push_task(task["task"])
     
     confirm_window.confirmed_tasks.connect(lambda tasks: process_task(tasks))
