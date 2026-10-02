@@ -13,6 +13,7 @@ from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent
 from urllib.parse import parse_qs
 from database_manager import delete_task, get_tasks, push_history
 from line_notifier import reply_user
+from models import CompleteData, ActualData
 
 configuration = Configuration(access_token=os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
@@ -44,6 +45,13 @@ def callback():
         abort(400)
     return "OK"
 
+@handler.add(MessageEvent, message=TextMessageContent)
+def handle_message(event) :
+    message_text = event.message.text
+    reply_token = event.reply_token
+    
+    # TODO: 未來這邊做解讀使用者傳送內容的功能，可能是提醒或修改某些東西之類的
+
 @handler.add(PostbackEvent)
 def handle_postback(event) :
     reply_token = event.reply_token
@@ -57,11 +65,13 @@ def handle_postback(event) :
     task = get_tasks(task_id=task_id)[0]
     
     if action == "complete" :
-        reply_user("task", reply_token, title = task.title, expect_point = task.expect_point, task_id = task_id, subtask_id = subtask_id)
-    elif action == "reply" :
-        used_point = max(0, min(10, int(task.expect_point) + int(params.get("offset", 0)))) # 確保最終的 used_point 在 0~10 之間
-        push_history(get_history_file(), {"task": task.title, "used_point": used_point})
         delete_task(task_id, subtask_id)
+        push_history(get_history_file(), CompleteData(id=task_id, title=task.title, deadline=task.deadline, actual_data=ActualData(task_category = task.estimate_data.task_category, congnitive_load = task.estimate_data.congnitive_load, actual_time = task.estimate_data.estimated_time, work_mode = task.estimate_data.suggest_work_mode)))
+        reply_user("task", reply_token, title = task.title, subtask_id = subtask_id)
+    # elif action == "reply" :
+    #     used_point = max(0, min(10, int(task.expect_point) + int(params.get("offset", 0)))) # 確保最終的 used_point 在 0~10 之間
+    #     push_history(get_history_file(), {"task": task.title, "used_point": used_point})
+    #     delete_task(task_id, subtask_id)
 
 # TODO: 未來拿來做使用者的隨手提醒功能
 # @handler.add(MessageEvent, message=TextMessageContent)
