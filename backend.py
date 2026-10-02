@@ -96,7 +96,7 @@ def handle_postback(event):
             actual_data=actual_data
         )
         
-        push_history(get_history_file(), complete_data)
+        push_history(get_history_file(), complete_data.model_dump())
         reply_user("task", reply_token, title=task.title, subtask_id=subtask_id)
 
 if __name__ == "__main__":
