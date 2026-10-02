@@ -102,4 +102,4 @@ def handle_postback(event):
 if __name__ == "__main__":
     # FastAPI 使用 uvicorn 作為 ASGI 伺服器
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
+    uvicorn.run("backend:app", host="0.0.0.0", port=5000, reload=True)
