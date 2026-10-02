@@ -78,7 +78,8 @@ def handle_postback(event):
     
     task = tasks[0]
     
-    if action == "complete":
+    if action == "complete" :
+        reply_user("task", reply_token, title=task.title, subtask_id=subtask_id)
         delete_task(task_id, subtask_id)
         
         # 為了提高可讀性與避免 PEP8 警告，將物件建構拆行
@@ -97,7 +98,6 @@ def handle_postback(event):
         )
         
         push_history(get_history_file(), complete_data.model_dump())
-        reply_user("task", reply_token, title=task.title, subtask_id=subtask_id)
 
 if __name__ == "__main__":
     # FastAPI 使用 uvicorn 作為 ASGI 伺服器
