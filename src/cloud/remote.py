@@ -7,11 +7,11 @@ import pytz
 
 load_dotenv()
 
-from models import TodoItem
-from line_notifier import send_line_notification
-from database_manager import push_task, get_tasks
-from ai_client import suggest_tasks
-from calendar_catcher import get_calendar_events
+from src.shared.models import TodoItem
+from src.cloud.line_notifier import send_line_notification
+from src.shared.database_manager import push_task, get_tasks
+from src.shared.ai_client import suggest_tasks
+from src.cloud.calendar_catcher import get_calendar_events
 
 temp_task = []
 

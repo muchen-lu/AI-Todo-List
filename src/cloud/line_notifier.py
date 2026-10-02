@@ -3,7 +3,7 @@ from typing import List, Literal
 from random import choice
 import json
 from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, PushMessageRequest, TextMessage, FlexMessage, FlexContainer, ReplyMessageRequest
-from models import TodoItem, SubtaskItem
+from src.shared.models import TodoItem, SubtaskItem
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -235,7 +235,7 @@ def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs)
 
 if __name__ == "__main__" :
     # 測試用
-    from models import TodoItem, EstimateData
+    from src.shared.models import TodoItem, EstimateData
     test_task = TodoItem(title="測試任務", deadline="2024-06-30 23:59", estimate_data=EstimateData(confidence = 0.9, congnitive_load = 3, estimated_time = 30, suggest_work_mode = "shallow", task_category = "learning"))
     send_line_notification([test_task], "night")
     send_line_notification([test_task], "morning")

@@ -11,9 +11,9 @@ from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMe
 from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent
 
 # 假設這些是你原本的自訂模組
-from database_manager import delete_task, get_tasks, push_history
-from line_notifier import reply_user
-from models import CompleteData, ActualData
+from src.shared.database_manager import delete_task, get_tasks, push_history
+from src.cloud.line_notifier import reply_user
+from src.shared.models import CompleteData, ActualData
 
 load_dotenv()
 

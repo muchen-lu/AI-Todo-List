@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QDate, QTime, pyqtSignal, QObject, QTimer, QRectF
 from PyQt6.QtGui import QPainter, QColor, QPen, QFont
-from models import TodoItem, SubtaskItem, EstimateData
+from src.shared.models import TodoItem, SubtaskItem, EstimateData
 
 # --- 現代感通用樣式表 ---
 MODERN_STYLE = """

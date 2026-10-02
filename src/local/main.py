@@ -6,15 +6,14 @@ from PyQt6.QtCore import QThread, pyqtSignal
 
 load_dotenv()
 
-from ui import ModernTaskUI, HotkeySignal, TaskCatchConfirmationUI, LoadingWidget
-from models import TodoItem
-from line_notifier import send_line_notification
-from task_catcher import get_classroom, get_ono
-from database_manager import push_task, get_tasks
+from src.local.ui import ModernTaskUI, HotkeySignal, TaskCatchConfirmationUI, LoadingWidget
+from src.shared.models import TodoItem
+from src.local.task_catcher import get_classroom, get_ono
+from src.shared.database_manager import push_task, get_tasks
 import keyboard
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
-from ai_client import generate_subtasks, eliminate_data
+from src.shared.ai_client import generate_subtasks, eliminate_data
 
 
 def create_tray(app, window):

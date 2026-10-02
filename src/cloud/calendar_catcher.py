@@ -6,7 +6,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import pytz
 import datetime
-from models import CalendarEvent
+from src.shared.models import CalendarEvent
 
 load_dotenv()
 

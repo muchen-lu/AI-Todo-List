@@ -5,8 +5,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 import datetime
 from playwright.sync_api import Playwright, sync_playwright, expect
-from models import TodoItem, ONOItem, GCItem
-from ai_client import eliminate_data
+from src.shared.models import TodoItem, ONOItem, GCItem
+from src.shared.ai_client import eliminate_data
 
 # 更新權限範圍
 SCOPES = [

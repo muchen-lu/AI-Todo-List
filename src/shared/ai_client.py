@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 import os
 import json
 from datetime import datetime
-from models import TodoItem, SubtaskItem, ONOItem, GCItem, EstimateData, CalendarEvent
-from calendar_catcher import get_calendar_events
-from database_manager import get_history
+from src.shared.models import TodoItem, SubtaskItem, ONOItem, GCItem, EstimateData, CalendarEvent
+from src.cloud.calendar_catcher import get_calendar_events
+from src.shared.database_manager import get_history
 
 load_dotenv()
 

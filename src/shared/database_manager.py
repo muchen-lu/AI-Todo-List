@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from models import TodoItem, SubtaskItem
+from src.shared.models import TodoItem, SubtaskItem
 
 cred = credentials.Certificate("firebase_key.json")
 firebase_admin.initialize_app(cred, {
