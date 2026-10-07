@@ -227,11 +227,27 @@ def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs)
     if mode == "task" and ("title" not in kargs) :
         raise ValueError("回覆任務訊息時必須提供 title 或 subtask_id")
     title = kargs.get("title")
-
+    message = kargs.get("message")
     if mode == "task" :
         message = TextMessage(text = f"收到啦～恭喜完成「{title}」任務！")
+    elif mode == "notification" :
+        message = TextMessage(text = message)
     request = ReplyMessageRequest(reply_token=reply_token, messages=[message])
     line_bot.reply_message(request)
+
+async def send_reminder(task_title: str):
+    """寄送提醒訊息給使用者
+
+    Args:
+        task_title (str): 任務標題
+    """
+    message = TextMessage(text = f"提醒你：{task_title}")
+    request = PushMessageRequest(to=LINE_USER_ID, messages=[message])
+    
+    try :
+        line_bot.push_message(request)
+    except Exception as e:
+        raise Exception(f"寄送 Line Message 失敗：{e}")
 
 if __name__ == "__main__" :
     # 測試用

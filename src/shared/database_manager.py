@@ -7,10 +7,13 @@ load_dotenv()
 
 from src.shared.models import TodoItem, SubtaskItem
 
-cred = credentials.Certificate("firebase_key.json")
-firebase_admin.initialize_app(cred, {
-    'databaseURL': os.getenv("DATABASE_URL")
-})
+if os.path.exists("firebase_key.json") :
+    cred = credentials.Certificate("firebase_key.json")
+    firebase_admin.initialize_app(cred, {
+        'databaseURL': os.getenv("DATABASE_URL")
+    })
+else :
+    firebase_admin.initialize_app(options={'databaseURL': os.getenv("DATABASE_URL")})
 ref = db.reference('/')
 
 def push_task(data: TodoItem) :

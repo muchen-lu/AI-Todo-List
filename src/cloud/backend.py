@@ -9,11 +9,14 @@ from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.messaging import Configuration, ApiClient, MessagingApi, ReplyMessageRequest, TextMessage
 from linebot.v3.webhooks import MessageEvent, PostbackEvent, TextMessageContent
+from google.cloud import tasks_v2
+from google.protobuf import timestamp_pb2
 
 # 假設這些是你原本的自訂模組
 from src.shared.database_manager import delete_task, get_tasks, push_history
-from src.cloud.line_notifier import reply_user
-from src.shared.models import CompleteData, ActualData
+from src.cloud.line_notifier import reply_user, send_reminder
+from src.shared.models import CompleteData, ActualData, ReminderItem
+from src.shared.ai_client import analyze_intent
 
 load_dotenv()
 
@@ -23,6 +26,8 @@ configuration = Configuration(access_token=os.getenv("LINE_CHANNEL_ACCESS_TOKEN"
 handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 
 COMPLETE_PATTERN = re.compile(r"^完成「(.+)」了！$")
+SERVER_URL = os.getenv("SERVER_URL")
+PROJECT_ID = os.getenv("PROJECT_ID")
 
 def get_history_file():
     now = datetime.datetime.now()
@@ -36,6 +41,27 @@ def get_history_file():
         return f"{year}_Q3"
     elif month in [10, 11, 12]:
         return f"{year}_Q4"
+
+def schedule_reminder(task_title: str, reminder_time: str) :
+    client = tasks_v2.CloudTasksClient()
+    parent = client.queue_path(PROJECT_ID, "us-central1", "line-reminders")
+    target_url = f"{SERVER_URL}/reminders"
+    
+    reminder_time = datetime.datetime.fromisoformat(reminder_time)
+    task = {
+        "http_request": {
+            "http_method": tasks_v2.HttpMethod.POST,
+            "url": target_url,
+            "headers": {"Content-Type": "application/json"},
+            "body": f'{{"task_title": "{task_title}"}}'.encode(),
+        },
+        "schedule_time": timestamp_pb2.Timestamp(seconds=int(reminder_time.timestamp())),
+    }
+    client.create_task(request={"parent": parent, "task": task})
+
+@app.post("/reminders")
+async def execute_reminder(request: Request, payload: dict) :
+    send_reminder(message = f"提醒你～要記得{payload['task_title']}喔！")
 
 @app.post("/callback")
 async def callback(request: Request, background_tasks: BackgroundTasks, x_line_signature: str = Header(None)):
@@ -58,8 +84,23 @@ def handle_message(event):
     message_text = event.message.text
     reply_token = event.reply_token
     
-    # TODO: 未來這邊做解讀使用者傳送內容的功能，可能是提醒或修改某些東西之類的
-    pass
+    intent_datas = analyze_intent(message_text)
+    for intent in intent_datas :
+        match intent["intent"] : #TODO: task 和 schedule 之後再做
+            case "reminder" :
+                data = ReminderItem(
+                    content=intent["content"],
+                    reminder=intent["reminder"],
+                    location=intent["location"],
+                    relativity=intent["relativity"]
+                )
+                if not re.match(r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", data.reminder) :
+                    errors = f"{data.reminder} 指的是什麼時候呢？請用 YYYY-MM-DD HH:MM 的格式回覆我喔\n" #TODO: 這裡之後要想怎麼接回 AI 去解決時間解讀的問題
+                    reply_user("reminder", reply_token, message=errors)
+                    return
+                message = f"我已經幫你設定好提醒囉，我會在 {data.reminder} 提醒你 {data.content}"
+                reply_user("reminder", reply_token, message=message)
+                #TODO: 之後要做如果 relativity 是 true 的話的多重提醒保險機制
 
 @handler.add(PostbackEvent)
 def handle_postback(event):

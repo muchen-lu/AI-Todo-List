@@ -230,6 +230,82 @@ def generate_subtasks(task: TodoItem) -> list[SubtaskItem] :
     except Exception as e :
         raise Exception(f"解析模型回覆失敗：{e}")
 
+def analyze_intent(message: str) -> list[dict] :
+    """分析使用者訊息意圖，並回傳結構化結果
+
+    Args:
+        message (str): 使用者訊息
+
+    Returns:
+        list[dict]: 結構化意圖分析結果
+    """
+    
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M")
+    
+    prompt = f"""
+    # 角色定位
+    你是一位「智慧日常助理與意圖解析引擎」，擅長從使用者的口語碎念、雜記或連續訊息中，主動辨識並原子化拆解出所有事項，並依據語意精準分類為「提醒」、「任務」或「行程」，同時為提醒事項計算精確時間與地點關聯度。
+
+    ---
+
+    # 輸入參數
+    - **現在時間（基準時間）**：{current_time}
+    - **使用者輸入內容**：{message}
+
+    ---
+
+    # 核心解析規則
+
+    ### 1. 事項原子化拆解（Atomization）
+    - 若輸入包含多件事（以「順便」、「然後」、「還有」、「對了」、「記得」等連接），必須**逐項拆成互相獨立的單一項目**，嚴禁合併。
+
+    ### 2. 意圖分類標準（Intent Classification）
+    每一項目必須精確歸入以下三類之一：
+    - **行程**：需使用者進行實體移動的任務，重點在於地理位置的改變與行程上的安排。
+    - **任務**：需要投入心力專注產出、有交付成果或目標的事項，重點在於完成度與截止日（例如：撰寫報告、開發功能、設計簡報）。
+    - **提醒**：輕量、短期的即時動作或生活備忘，重點在於「到了某時間」或「到了某地點」該被觸發（例如：吃藥、買生活用品、帶傘、繳費、打電話）。
+
+    ### 3. 提醒類事項專用規則
+    若 `intent` 為「提醒」：
+    - **計算準確提醒時間（reminder）**：
+    - 必須以「現在時間」為基準，換算為標準格式 `YYYY-MM-DD HH:MM`。
+    - 若時間不具體，請直接填入使用者的用詞，例如：稍後。
+    - **地點與關聯性判定（location & relativity）**：
+    - **location**：提取該事項綁定的具體場所、店家或實體名稱（如：全聯、辦公室、家裡、超商）；無提及則為 `null`。
+    - **relativity（地點關聯性）**：
+        - true：若該事項的執行地點與使用者當前位置高度相關，且明確指定了地點。
+        - false：若該事項的執行地點與使用者當前位置無關，或未指定地點。
+    - *註：若分類為「任務」或「行程」，`reminder` 與 `relativity` 依合理推論填入或標註 `null` / `無`。*
+
+    ---
+
+    # 輸出格式規範
+    必須一律以乾淨的 **JSON 陣列** 輸出，絕不包含任何 markdown 代碼塊以外的前言或結尾閒聊。
+
+    > 補充說明：為確保能辨識「具體要做什麼事」，資料結構中包含 `content` 欄位作為事項動作描述。
+
+    ```json
+    [
+    {
+        "content": "事項簡短動作描述（如：買牛奶）",
+        "intent": "reminder | task | schedule",
+        "reminder": "YYYY-MM-DD HH:MM（無具體時間則為使用者用詞）",
+        "location": "地點名稱（無地點則為 null）",
+        "relativity": "true | false（無地點則為 null）"
+    }
+    ]
+    ```
+    """
+    
+    response = model.generate_content(prompt).text.replace("```json", "").replace("```", "").replace("null", "None").replace("true", "True").replace("false", "False").strip()
+    print(response)
+    
+    try :
+        intent_data = json.loads(response)
+        return intent_data
+    except Exception as e :
+        raise Exception(f"解析模型回覆失敗：{e}")
+
 # if __name__ == "__main__" :
 #     task = TodoItem(title = "程式交易歷史紀錄功能實作", deadline = "2026-04-30 20:00")
 #     tasks = generate_subtasks(task)

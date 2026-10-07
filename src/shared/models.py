@@ -90,3 +90,9 @@ class CalendarEvent(BaseModel) :
             values["today"] = True
         # values["long"] = int((datetime.datetime.fromisoformat(end) - datetime.datetime.fromisoformat(start)).total_seconds() // 60)
         return values
+
+class ReminderItem(BaseModel) :
+    content: str = Field(..., description = "事項簡短動作描述（如：買牛奶）")
+    reminder: Optional[str] = Field(None, description = "提醒時間，格式為 YYYY-MM-DD HH:MM，若無具體時間則為使用者用詞")
+    location: Optional[str] = Field(None, description = "地點名稱，若無地點則為 null")
+    relativity: Optional[bool] = Field(None, description = "地點關聯性，true 代表與使用者當前位置高度相關且明確指定了地點，false 代表與使用者當前位置無關或未指定地點，若無地點則為 null")

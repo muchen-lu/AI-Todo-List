@@ -11,6 +11,8 @@ wheels/
 
 # Secret files
 .env
+cloud-env.dev.yaml
+cloud-env.prod.yaml
 local_token.json
 remote_token.json
 credentials.json

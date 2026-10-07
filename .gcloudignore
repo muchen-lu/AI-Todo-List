@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.python-version
+
+.env
+cloud-env.dev.yaml
+cloud-env.prod.yaml
+*.json
+
+auto_launch.bat
+silent_launch.vbs
+
+icon.png
+README.md
