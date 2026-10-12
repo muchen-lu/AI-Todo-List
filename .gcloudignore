@@ -12,3 +12,5 @@ silent_launch.vbs
 
 icon.png
 README.md
+
+!firebase_key.json

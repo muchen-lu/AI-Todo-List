@@ -23,6 +23,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "apscheduler" },
     { name = "beautifulsoup4" },
+    { name = "cryptography" },
     { name = "dotenv" },
     { name = "fastapi" },
     { name = "firebase-admin" },
@@ -48,6 +49,7 @@ gui = [
 requires-dist = [
     { name = "apscheduler", specifier = ">=3.11.2" },
     { name = "beautifulsoup4", specifier = ">=4.14.3" },
+    { name = "cryptography", specifier = ">=46.0.6" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "fastapi", specifier = ">=0.142.2" },
     { name = "firebase-admin", specifier = ">=7.3.0" },

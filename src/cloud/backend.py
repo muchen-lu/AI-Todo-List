@@ -17,10 +17,12 @@ from src.shared.database_manager import delete_task, get_tasks, push_history
 from src.cloud.line_notifier import reply_user, send_reminder
 from src.shared.models import CompleteData, ActualData, ReminderItem
 from src.shared.ai_client import analyze_intent
+from src.cloud.cloud_auth import router as auth_router, try_handle_pairing_code
 
 load_dotenv()
 
 app = FastAPI()
+app.include_router(auth_router)
 
 configuration = Configuration(access_token=os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
@@ -81,8 +83,14 @@ async def callback(request: Request, background_tasks: BackgroundTasks, x_line_s
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_message(event):
+    user_id = event.source.user_id
     message_text = event.message.text
     reply_token = event.reply_token
+    
+    pair_reply = try_handle_pairing_code(user_id, message_text)
+    if pair_reply :
+        reply_user("pairing", reply_token, message=pair_reply)
+        return
     
     intent_datas = analyze_intent(message_text)
     for intent in intent_datas :

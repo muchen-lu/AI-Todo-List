@@ -44,7 +44,7 @@ class CompleteData(BaseModel) :
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "任務截止日期，格式為 YYYY-MM-DD")
     actual_data: ActualData = Field(..., description = "使用者對於任務的實際資訊")
 
-class TodoItem(BaseModel) : # TODO: ONO 和正式 TODO 可以分開，用於區別是否有 subtasks、expect_point 與 used_point 等欄位
+class TodoItem(BaseModel) :
     id: str = Field(default_factory = lambda: str(uuid.uuid4()), description = "唯一識別指標，避免任務重名覆蓋問題")
     title: str = Field(description = "任務標題")
     deadline: Optional[str] = Field(None, pattern=r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$", description = "任務截止日期，格式為 YYYY-MM-DD")

@@ -217,11 +217,11 @@ def send_line_notification(tasks: List[TodoItem | SubtaskItem], timing: Literal[
     except Exception as e:
         raise Exception(f"寄送 Line Message 失敗：{e}")
 
-def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs) -> None:
+def reply_user(mode: Literal["task", "notification", "pairing"], reply_token: str, **kargs) -> None:
     """回覆使用者訊息
 
     Args:
-        mode (Literal["task", "notification"]): 回覆類型
+        mode (Literal["task", "notification", "pairing"]): 回覆類型
         reply_token (str): Line 的 reply token
     """
     if mode == "task" and ("title" not in kargs) :
@@ -231,6 +231,8 @@ def reply_user(mode: Literal["task", "notification"], reply_token: str, **kargs)
     if mode == "task" :
         message = TextMessage(text = f"收到啦～恭喜完成「{title}」任務！")
     elif mode == "notification" :
+        message = TextMessage(text = message)
+    elif mode == "pairing" :
         message = TextMessage(text = message)
     request = ReplyMessageRequest(reply_token=reply_token, messages=[message])
     line_bot.reply_message(request)
