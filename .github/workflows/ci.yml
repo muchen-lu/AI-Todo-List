@@ -44,7 +44,10 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: 7. 執行 Pytest (單元測試)
-        run: uv run pytest --html=ci-reports/pytest.html --self-contained-html --md-report --md-report-output ci-reports/md_report.md
+        run: >
+          uv run pytest
+          --html=ci-reports/pytest.html --self-contained-html
+          --md-report --md-report-output ci-reports/md_report.md
 
       - name: 8. 將測試報告寫入 GitHub 面板
         if: always()
