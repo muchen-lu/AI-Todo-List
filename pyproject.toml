@@ -1,6 +1,6 @@
 [project]
 name = "ai-todo-list"
-version = "0.1.0"
+version = "0.2.0"
 description = "這是一個用 AI 來協助管理任務的工具，會自動從 ONO 和 Google Classroom 上抓任務，亦支援手動輸入。每天早上 7:00 會準時用 Line 發通知幫你決定今天要做的 5 件事情。"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -39,6 +39,7 @@ dev = [
 ]
 
 [tool.mypy]
+files = ["src"]
 plugins = ["pydantic.mypy"]
 ignore_missing_imports = true
 exclude = ["tests/"]
@@ -66,6 +67,7 @@ init_typed = true
 warn_required_dynamic_aliases = true
 
 [tool.ruff]
+src = ["src"]
 line-length = 100
 target-version = "py311"
 
@@ -75,4 +77,4 @@ ignore = ["BLE001", "TRY002"]
 
 [tool.pytest.ini_options]
 addopts = "-v --cov=src --cov-report=term-missing"
-testpaths = ["tests"]
+testpaths = ["src/tests"]
