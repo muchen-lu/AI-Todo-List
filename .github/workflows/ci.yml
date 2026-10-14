@@ -37,7 +37,7 @@ jobs:
         run: uv run mypy
 
       - name: 7. 執行 Pytest (單元測試)
-        run: uv run pytest
+        run: uv run pytest --html=report.html --self-contained-html
 
       - name: 8. 儲存測試報告附件
         uses: actions/upload-artifact@v4
