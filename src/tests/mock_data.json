@@ -1,0 +1,132 @@
+{
+    "google_classroom_api_response": {
+    "courseId": "703644954444",
+    "id": "868826738167",
+    "title": "暑期學習任務",
+    "description": "暑假期間，除了自我充實與休息，請各位同學依據成長導師為你規劃的「專屬個人任務」進行學習與探索。\n\n 請參閱6/30另行發送之個人郵件（或與成長導師確認個人任務細節）。\n 請將完成任務後的學習歷程紀錄（可包含：學習成果檔案、心得文字、照片、影片或簡報檔等）上傳至本作業。\n 請務必於  完成線上繳交。\n請確認上傳的檔案格式是否正確。\n若任務中有需要特別備註的事項，請一併寫在「私人留言」處。\n期待看到大家豐富的暑期學習成果，祝大家暑假愉快、充實！",
+    "state": "PUBLISHED",
+    "alternateLink": "https://classroom.google.com/c/NzAzNjQ0OTU0NDQ0/a/ODY4ODI2NzM4MTY3/details",
+    "creationTime": "2026-06-30T03:38:48.405Z",
+    "updateTime": "2026-08-31T00:10:47.431Z",
+    "dueDate": {
+        "year": 2026,
+        "month": 8,
+        "day": 30
+    },
+    "dueTime": {
+        "hours": 12
+    },
+    "maxPoints": 100,
+    "workType": "ASSIGNMENT",
+    "submissionModificationMode": "MODIFIABLE_UNTIL_TURNED_IN",
+    "creatorUserId": "108908401038872797731",
+    "topicId": "868826738169"
+    },
+    "google_calendar_event_day": {
+        "kind": "calendar#event",
+        "etag": "\"3583945881784574\"",
+        "id": "0vcj59dudssqdapgl6pa6hjqu8",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=MHZjajU5ZHVkc3NxZGFwZ2w2cGE2aGpxdTggcnlhbi55b25nbGFpQG0",
+        "created": "2026-10-14T10:15:40.000Z",
+        "updated": "2026-10-14T10:15:40.892Z",
+        "summary": "測試",
+        "creator": {
+            "email": "ryan.yonglai@gmail.com",
+            "self": true
+        },
+        "organizer": {
+            "email": "ryan.yonglai@gmail.com",
+            "self": true
+        },
+        "start": {
+            "date": "2026-10-15"
+        },
+        "end": {
+            "date": "2026-10-16"
+        },
+        "transparency": "transparent",
+        "iCalUID": "0vcj59dudssqdapgl6pa6hjqu8@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": false
+        },
+        "eventType": "default"
+    },
+    "google_calendar_event_time": {
+        "kind": "calendar#event",
+        "etag": "\"3583906830384414\"",
+        "id": "ckpm4dr5c9j32b9kc5j3eb9k6op3ebb1c9gj4b9j6gpj8eb3c8sm8oplco",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=Y2twbTRkcjVjOWozMmI5a2M1ajNlYjlrNm9wM2ViYjFjOWdqNGI5ajZncGo4ZWIzYzhzbThvcGxjbyByeWFuLnlvbmdsYWlAbQ",
+        "created": "2026-10-14T04:50:15.000Z",
+        "updated": "2026-10-14T04:50:15.192Z",
+        "summary": "打球",
+        "creator": {
+            "email": "ryan.yonglai@gmail.com",
+            "self": true
+        },
+        "organizer": {
+            "email": "ryan.yonglai@gmail.com",
+            "self": true
+        },
+        "start": {
+            "dateTime": "2026-10-20T12:00:00+08:00",
+            "timeZone": "Asia/Taipei"
+        },
+        "end": {
+            "dateTime": "2026-10-20T14:00:00+08:00",
+            "timeZone": "Asia/Taipei"
+        },
+        "iCalUID": "ckpm4dr5c9j32b9kc5j3eb9k6op3ebb1c9gj4b9j6gpj8eb3c8sm8oplco@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": true
+        },
+        "eventType": "default"
+    },
+    "task_1": {
+        "title": "task_1",
+        "deadline": "2026-10-30 23:59",
+        "estimate_data": {
+            "task_category": "other",
+            "congnitive_load": 3,
+            "estimated_time": 30,
+            "suggest_work_mode": "deep",
+            "confidence_level": 0.95
+        }
+    },
+    "task_2": {
+        "title": "task_2",
+        "deadline": "2026-10-30 23:59",
+        "estimate_data": {
+            "task_category": "other",
+            "congnitive_load": 3,
+            "estimated_time": 30,
+            "suggest_work_mode": "shallow",
+            "confidence_level": 0.95
+        }
+    },
+    "completed_task_1": {
+        "title": "completed_task_1",
+        "actual_data": {
+            "task_category": "other",
+            "congnitive_load": 3,
+            "actual_time": 30,
+            "work_mode": "deep"
+        }
+    },
+    "completed_task_2": {
+        "title": "completed_task_2",
+        "actual_data": {
+            "task_category": "other",
+            "congnitive_load": 3,
+            "actual_time": 30,
+            "work_mode": "shallow"
+        }
+    },
+    "reminder_1": {
+        "title": "reminder_1",
+        "reminder_time": "2026-10-30 23:59"
+    }
+}
