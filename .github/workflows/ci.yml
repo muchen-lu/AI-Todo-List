@@ -37,12 +37,21 @@ jobs:
         run: uv run ruff check . --output-format=github
 
       - name: 6. 執行 Mypy (靜態型別安全檢查)
-        run: uv run mypy --html-report ci-reports/mypy
+        run: |
+          echo "### MyPy 型別檢查報告" >> $GITHUB_STEP_SUMMARY
+          echo '```text' >> $GITHUB_STEP_SUMMARY
+          uv run mypy --html-report ci-reports/mypy | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
 
       - name: 7. 執行 Pytest (單元測試)
-        run: uv run pytest --html=ci-reports/pytest.html --self-contained-html
+        run: uv run pytest --html=ci-reports/pytest.html --self-contained-html --md-report --md-report-output ci-reports/md_report.md
 
-      - name: 8. 儲存測試報告附件
+      - name: 8. 將測試報告寫入 GitHub 面板
+        if: always()
+        # 把 Markdown 檔案的內容，倒進 GitHub 的摘要變數中
+        run: cat ci-reports/md_report.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 9. 儲存測試報告附件
         uses: actions/upload-artifact@v4
         if: always()
         with:
