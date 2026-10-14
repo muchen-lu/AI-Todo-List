@@ -1,0 +1,48 @@
+name: V2 Rewrite CI Pipeline
+
+on:
+  push:
+    branches: [ "main", "refactor/*" ] # 監聽你現在的重構分支
+#   pull_request:
+#     branches: [ "main" ]
+
+jobs:
+  code-quality-and-test:
+    name: 程式碼檢查與測試
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. 取得程式碼
+        uses: actions/checkout@v4
+
+      - name: 2. 安裝與設定 uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: 3. 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version" # 自動讀取 uv 設定的版本
+
+      - name: 4. 安裝專案套件
+        run: uv sync --all-extras --dev
+
+      - name: 5. 執行 Ruff (程式碼風格與語法檢查)
+        # 發生錯誤時直接在 GitHub 程式碼行數上標註
+        run: uv run ruff check . --output-format=github
+
+      - name: 6. 🛡️ 執行 Mypy (靜態型別安全檢查)
+        run: uv run mypy
+
+      - name: 7. 🧪 執行 Pytest (單元測試)
+        run: uv run pytest --html=report.html --self-contained-html
+
+      - name: 8. 📁 儲存測試報告附件
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pytest-html-report
+          path: report.html
+          retention-days: 7
