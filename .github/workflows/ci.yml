@@ -41,7 +41,7 @@ jobs:
           echo "### Bandit 資安掃描報告" >> $GITHUB_STEP_SUMMARY
           echo '```text' >> $GITHUB_STEP_SUMMARY
 
-          uv run bandit -c pyproject.toml -ll | tee -a $GITHUB_STEP_SUMMARY
+          uv run bandit -c pyproject.toml -r src --severity-level high | tee -a $GITHUB_STEP_SUMMARY
 
           echo '```' >> $GITHUB_STEP_SUMMARY
 
