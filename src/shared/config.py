@@ -9,9 +9,7 @@ PREFIX: str = "demo_" if CURRENT_ENV == "development" else ""
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8", extra="ignore", env_prefix=PREFIX
-    )
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore", env_prefix=PREFIX)
 
     gemini_api_key: str = Field(validation_alias="GEMINI_API_KEY", description="Gemini API Key")
     database_url: str = Field(validation_alias="DATABASE_URL", description="Project Database URL")

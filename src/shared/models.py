@@ -80,9 +80,7 @@ class TodoItem(BaseModel):
 class CompleteItem(BaseModel):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, description="History ID")
     title: str = Field(..., description="Task title")
-    completed_at: datetime.datetime = Field(
-        default_factory=datetime.datetime.now, description="Completion timestamp"
-    )
+    completed_at: datetime.datetime = Field(default_factory=datetime.datetime.now, description="Completion timestamp")
     actual_data: ActualData = Field(..., description="User actual data for the task")
 
     @field_serializer("completed_at")
@@ -114,9 +112,7 @@ class GCItem(BaseModel):
             day = values["dueDate"]["day"]
             hour = values.get("dueTime", {}).get("hour", 23)
             minute = values.get("dueTime", {}).get("minute", 59)
-            values["deadline"] = datetime.datetime(
-                year=year, month=month, day=day, hour=hour, minute=minute
-            )
+            values["deadline"] = datetime.datetime(year=year, month=month, day=day, hour=hour, minute=minute)
         else:
             values["deadline"] = (datetime.datetime.now() + datetime.timedelta(days=7)).replace(
                 hour=23, minute=59, second=0, microsecond=0
