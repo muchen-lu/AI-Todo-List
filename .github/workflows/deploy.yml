@@ -1,21 +1,93 @@
-name: CD Pipeline to GCP Cloud Run
+name: CI/CD Pipeline to GCP Cloud Run
 
 on:
-  workflow_run:
-    workflows: ["CI Pipeline"]
-    types: [completed]
-    branches: ["refactor/v2"]
+  push:
+    branches: [ "main", "refactor/*" ]
 
 jobs:
+  # ==========================================
+  # 第一階段：程式碼品質檢查與自動化測試 (CI)
+  # ==========================================
+  code-quality-and-test:
+    name: 程式碼檢查與測試
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 0. 準備報告資料夾
+        run: mkdir -p ci-reports
+
+      - name: 1. 取得程式碼
+        uses: actions/checkout@v4
+
+      - name: 2. 安裝與設定 uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: 3. 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
+
+      - name: 4. 準備假 .env 檔案
+        run: cp .env.example .env
+
+      - name: 5. 安裝專案套件
+        run: uv sync --all-extras --dev
+
+      - name: 6. 執行 Ruff (程式碼風格與語法檢查)
+        run: uv run ruff check . --output-format=github
+
+      - name: 7. 執行 Bandit (安全性掃描)
+        run: |
+          echo "### Bandit 資安掃描報告" >> $GITHUB_STEP_SUMMARY
+          echo '```text' >> $GITHUB_STEP_SUMMARY
+          uv run bandit -c pyproject.toml -r src --severity-level high | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: 8. 執行 Mypy (靜態型別安全檢查)
+        run: |
+          echo "### MyPy 型別檢查報告" >> $GITHUB_STEP_SUMMARY
+          echo '```text' >> $GITHUB_STEP_SUMMARY
+          uv run mypy --html-report ci-reports/mypy | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: 9. 執行 Pytest (單元測試)
+        run: >
+          uv run pytest
+          --html=ci-reports/pytest.html --self-contained-html
+          --md-report --md-report-output ci-reports/md_report.md
+
+      - name: 10. 將測試報告寫入 GitHub 面板
+        if: always()
+        run: cat ci-reports/md_report.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 11. 儲存測試報告附件
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: all-ci-reports
+          path: ci-reports/
+          retention-days: 7
+
+  # ==========================================
+  # 第二階段：部署至 GCP Cloud Run (CD)
+  # ==========================================
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: 部署至 GCP Cloud Run
+    needs: code-quality-and-test
+    # 守門條件：
+    # 1. 第一階段所有檢查與測試全部通過 (needs 預設行為)
+    # 2. 僅在推送到 main 或指定重構分支 (如 refactor/v2) 時才執行部署，避免每個實驗分支都亂觸發部署
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/refactor/v2'
     runs-on: ubuntu-latest
 
     steps:
       - name: 1. 取得程式碼
         uses: actions/checkout@v4
 
-      - name: 2. 登入 Cloud Run
+      - name: 2. 登入 Google Cloud
         uses: google-github-actions/auth@v2
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
@@ -25,8 +97,8 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ai-todo-list-backend
-          region: asia-east1 # 台灣彰化機房
-          source: .          # 此專案資料夾有 Dockerfile
+          region: asia-east1
+          source: .
 
       - name: 4. 顯示部署結果
         run: echo "部署成功！你的雲端網址是 ${{ steps.deploy.outputs.url }}"
