@@ -11,6 +11,10 @@ wheels/
 
 # secret files
 .env
+firebase_key.json
 
 # pytest file
 .coverage
+
+# log file
+logs/

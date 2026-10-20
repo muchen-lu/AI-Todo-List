@@ -41,7 +41,7 @@ def test_subtask_item_uuid_generation(read_mock_data):
             congnitive_load=task_1["estimate_data"]["congnitive_load"],
             estimated_time=task_1["estimate_data"]["estimated_time"],
             suggest_work_mode=task_1["estimate_data"]["suggest_work_mode"],
-            confidence=task_1["estimate_data"]["confidence_level"],
+            confidence=task_1["estimate_data"]["confidence"],
         ),
     )
     subtask_2 = SubtaskItem(
@@ -53,7 +53,7 @@ def test_subtask_item_uuid_generation(read_mock_data):
             congnitive_load=task_2["estimate_data"]["congnitive_load"],
             estimated_time=task_2["estimate_data"]["estimated_time"],
             suggest_work_mode=task_2["estimate_data"]["suggest_work_mode"],
-            confidence=task_2["estimate_data"]["confidence_level"],
+            confidence=task_2["estimate_data"]["confidence"],
         ),
     )
 
@@ -72,7 +72,7 @@ def test_subtask_item_deadline_export(read_mock_data):
             congnitive_load=task_1["estimate_data"]["congnitive_load"],
             estimated_time=task_1["estimate_data"]["estimated_time"],
             suggest_work_mode=task_1["estimate_data"]["suggest_work_mode"],
-            confidence=task_1["estimate_data"]["confidence_level"],
+            confidence=task_1["estimate_data"]["confidence"],
         ),
     )
 
@@ -93,7 +93,7 @@ def test_subtask_item_wrong_deadline_input(read_mock_data):
                 congnitive_load=task_1["estimate_data"]["congnitive_load"],
                 estimated_time=task_1["estimate_data"]["estimated_time"],
                 suggest_work_mode=task_1["estimate_data"]["suggest_work_mode"],
-                confidence=task_1["estimate_data"]["confidence_level"],
+                confidence=task_1["estimate_data"]["confidence"],
             ),
         )
 
@@ -111,7 +111,7 @@ def test_todo_item_uuid_generation(read_mock_data):
             congnitive_load=task_1["estimate_data"]["congnitive_load"],
             estimated_time=task_1["estimate_data"]["estimated_time"],
             suggest_work_mode=task_1["estimate_data"]["suggest_work_mode"],
-            confidence=task_1["estimate_data"]["confidence_level"],
+            confidence=task_1["estimate_data"]["confidence"],
         ),
     )
     todo_2 = TodoItem(
@@ -122,7 +122,7 @@ def test_todo_item_uuid_generation(read_mock_data):
             congnitive_load=task_2["estimate_data"]["congnitive_load"],
             estimated_time=task_2["estimate_data"]["estimated_time"],
             suggest_work_mode=task_2["estimate_data"]["suggest_work_mode"],
-            confidence=task_2["estimate_data"]["confidence_level"],
+            confidence=task_2["estimate_data"]["confidence"],
         ),
     )
 
@@ -140,7 +140,7 @@ def test_todo_item_deadline_export(read_mock_data):
             congnitive_load=task_1["estimate_data"]["congnitive_load"],
             estimated_time=task_1["estimate_data"]["estimated_time"],
             suggest_work_mode=task_1["estimate_data"]["suggest_work_mode"],
-            confidence=task_1["estimate_data"]["confidence_level"],
+            confidence=task_1["estimate_data"]["confidence"],
         ),
     )
 
@@ -160,7 +160,7 @@ def test_todo_item_wrong_deadline_input(read_mock_data):
                 congnitive_load=task_1["estimate_data"]["congnitive_load"],
                 estimated_time=task_1["estimate_data"]["estimated_time"],
                 suggest_work_mode=task_1["estimate_data"]["suggest_work_mode"],
-                confidence=task_1["estimate_data"]["confidence_level"],
+                confidence=task_1["estimate_data"]["confidence"],
             ),
         )
 

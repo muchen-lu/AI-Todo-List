@@ -5,5 +5,5 @@ check:
 	uv run ruff check . --fix
 	uv run bandit -c pyproject.toml -r src --severity-level medium
 	uv run mypy .
-	uv run pytest
+	uv run pytest -s -x
 	uv run pytest --cov=src --cov-report=term-missing
