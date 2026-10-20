@@ -1,5 +1,5 @@
 import datetime
-import os
+import json
 import re
 import secrets
 import uuid
@@ -27,12 +27,12 @@ class QuotaExceeded(DatabaseError):
     pass
 
 
-if os.path.exists("firebase_key.json"):
-    cred = credentials.Certificate("firebase_key.json")
+try:
+    cred = credentials.Certificate(json.loads(settings.database_key))
     firebase_admin.initialize_app(cred, {"databaseURL": settings.database_url})
     logger.info("Initialize Firebase Database Success.")
-else:
-    logger.error("Initialize Firebase Database failed: firebase_key.json file does not exist.")
+except Exception as e:
+    logger.error(f"Initialize Firebase Database failed: {e}")
 
 
 def push_task(user_id: str, data: TodoItem):  # TODO: 未來要做新增子任務的功能

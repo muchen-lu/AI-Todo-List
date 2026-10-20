@@ -11,6 +11,7 @@ def test_read_environment_variable():
     assert settings.database_url == "database-url"
     assert settings.ono_username == "ono-username"
     assert settings.ono_password == "ono-password"
+    assert settings.database_key == "your-firebase-key"
 
 
 # Case2: test changed environment variable read
@@ -23,8 +24,8 @@ def test_read_changed_environment_variable(monkeypatch):
 
     assert settings_dev.line_channel_access_token == "demo-line-channel-access-token"
     assert settings_dev.line_channel_secret == "demo-line-channel-secret"
-    assert settings_dev.line_user_id == "demo-line-user-id"
+    # assert settings_dev.line_user_id == "demo-line-user-id"
 
     assert settings_prod.line_channel_access_token == "line-channel-access-token"
     assert settings_prod.line_channel_secret == "line-channel-secret"
-    assert settings_prod.line_user_id == "line-user-id"
+    # assert settings_prod.line_user_id == "line-user-id"

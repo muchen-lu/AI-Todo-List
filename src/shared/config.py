@@ -13,13 +13,14 @@ class Settings(BaseSettings):
 
     gemini_api_key: str = Field(validation_alias="GEMINI_API_KEY", description="Gemini API Key")
     database_url: str = Field(validation_alias="DATABASE_URL", description="Project Database URL")
+    database_key: str = Field(validation_alias="FIREBASE_KEY", description="Firebase Key")
 
     ono_username: str = Field(validation_alias="ONO_USERNAME", description="ONO username")
     ono_password: str = Field(validation_alias="ONO_PASSWORD", description="ONO password")
 
     line_channel_access_token: str = Field(description="Line Channel Access Token")
     line_channel_secret: str = Field(description="Line Channel Secret")
-    line_user_id: str = Field(description="Line User ID")
+    # line_user_id: str = Field(description="Line User ID")
 
 
 @lru_cache
