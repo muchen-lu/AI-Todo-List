@@ -15,3 +15,6 @@ firebase_key.json
 
 # pytest file
 .coverage
+
+# log file
+logs/
