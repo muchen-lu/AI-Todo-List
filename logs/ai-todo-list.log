@@ -1,0 +1,853 @@
+2026-10-17 18:46:48 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 18:48:23 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 18:48:23 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:39:22 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 20:39:22 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:39:24 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-17 20:44:29 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 20:44:29 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:44:29 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-17 20:45:20 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 20:45:20 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:45:20 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-17 20:45:57 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 20:45:57 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:45:57 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-17 20:46:30 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 20:46:30 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:46:30 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-17 20:46:30 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-17 20:46:30 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-17 20:46:37 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-17 20:46:37 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-17 20:46:37 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-17 20:46:37 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-17 20:46:37 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-17 21:36:24 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:36:24 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:36:24 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:36:24 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:36:24 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:36:24 | ERROR    | src.shared.database_manager:get_tasks:96 - Recieved invalid task ids
+2026-10-17 21:39:36 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:39:36 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:39:36 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:39:36 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:39:36 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:39:36 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 21:42:28 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:42:28 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:42:28 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:42:28 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:42:28 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:42:28 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 21:44:29 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:44:29 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:44:29 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:44:29 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:44:29 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:44:29 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 21:45:47 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:45:47 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:45:47 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:45:47 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:45:47 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:45:47 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 21:54:44 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:56:07 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:56:07 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:56:07 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:56:07 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:56:07 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:56:07 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 21:59:04 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 21:59:05 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 21:59:05 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 21:59:05 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 21:59:05 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 21:59:05 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 22:00:07 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 22:00:08 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 22:00:08 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 22:00:08 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 22:00:08 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 22:00:08 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 22:00:08 | INFO     | src.shared.database_manager:get_tasks:144 - Getting tasks success.
+2026-10-17 22:02:40 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 22:02:41 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 22:02:41 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 22:02:41 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 22:02:41 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 22:02:41 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-17 22:10:17 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-17 22:10:17 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-17 22:10:17 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-17 22:10:17 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-17 22:10:17 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-17 22:10:17 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-18 12:24:51 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-18 12:24:51 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-18 12:24:51 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-18 12:24:51 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-18 12:24:51 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-18 12:24:51 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-20 08:35:49 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-20 08:35:49 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:35:49 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-20 08:35:49 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-20 08:35:49 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-20 08:35:49 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-20 08:38:54 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-20 08:38:54 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:38:54 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-20 08:38:54 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-20 08:38:54 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-20 08:38:54 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-20 08:42:26 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-20 08:42:26 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:42:26 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-20 08:42:26 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-20 08:42:26 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-20 08:42:26 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-20 08:42:26 | INFO     | src.shared.database_manager:get_tasks:143 - Getting tasks success.
+2026-10-20 08:42:26 | ERROR    | src.shared.database_manager:get_tasks:96 - Recieved invalid task ids
+2026-10-20 08:43:32 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-20 08:43:32 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:43:32 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-20 08:43:32 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-20 08:43:32 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-20 08:43:32 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-20 08:43:32 | INFO     | src.shared.database_manager:get_tasks:143 - Getting tasks success.
+2026-10-20 08:43:32 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:45:16 | INFO     | src.shared.database_manager:<module>:32 - Initialize Firebase Database Success.
+2026-10-20 08:45:16 | INFO     | src.shared.database_manager:push_task:58 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:45:16 | INFO     | src.shared.database_manager:push_task:62 - Push data success.
+2026-10-20 08:45:16 | ERROR    | src.shared.database_manager:push_task:52 - Recieved invalid user_id
+2026-10-20 08:45:16 | ERROR    | src.shared.database_manager:push_task:55 - Recieved invalid data
+2026-10-20 08:45:16 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting all tasks from test_user's database.
+2026-10-20 08:45:16 | INFO     | src.shared.database_manager:get_tasks:142 - Getting tasks success.
+2026-10-20 08:45:16 | INFO     | src.shared.database_manager:get_tasks:99 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:47:34 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:47:34 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:47:34 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:47:34 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:47:34 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:47:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:47:34 | INFO     | src.shared.database_manager:get_tasks:143 - Getting tasks success.
+2026-10-20 08:47:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:48:16 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:48:17 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:48:17 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:48:17 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:48:17 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:48:17 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:48:17 | INFO     | src.shared.database_manager:get_tasks:143 - Getting tasks success.
+2026-10-20 08:48:17 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:48:17 | ERROR    | src.shared.database_manager:get_tasks:146 - Firebase tasks structure is broken
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:50:42 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:50:42 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:50:42 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:50:42 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:51:43 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:51:43 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:51:43 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 08:51:43 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:51:43 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 08:51:43 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:51:43 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:51:53 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:51:53 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:51:53 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 08:51:53 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:51:53 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 08:51:53 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:51:53 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:53:13 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:53:13 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:53:13 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 08:53:13 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:53:13 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 08:53:13 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:53:13 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:53:20 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 08:53:21 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 08:53:21 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 08:53:21 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 08:53:21 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 08:53:21 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 08:53:21 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 08:53:21 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:05:07 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:05:07 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:05:07 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:05:07 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:05:07 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:05:07 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:05:07 | INFO     | src.shared.database_manager:delete_task:177 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:07:25 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:07:26 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:07:26 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:07:26 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:07:26 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:07:26 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:07:26 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:delete_task:177 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:07:26 | INFO     | src.shared.database_manager:delete_task:187 - Deleting task c2cd6ebc-7bc3-45ab-9db9-a6d8b6e6c844 success
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:08:17 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:08:17 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:08:17 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:08:17 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:08:17 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:08:17 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:delete_task:177 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:delete_task:187 - Deleting task 24350f47-e219-431b-8cd8-f2f9aa65bd20 success
+2026-10-20 09:08:17 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:08:17 | INFO     | src.shared.database_manager:delete_task:177 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:11:16 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 23c76a30-8e8f-414f-ad33-5626cc3414d2 success
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:11:16 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:11:16 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:18:33 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:18:34 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 0bd14aca-da42-4ab9-9e2e-69af7b415260 success
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:18:34 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:18:34 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:18:41 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task f2c4f407-1066-4013-bb09-5e9d30eeb2ed success
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:18:41 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:18:41 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:38:10 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task b31d302b-bdb9-4e43-a3dc-6e05f6347755 success
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:38:10 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:38:10 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:38:46 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 2edc1604-dabb-48e4-b895-6e68398eaa8b success
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:38:46 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 09:38:46 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 09:38:55 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:38:56 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 6cbdedef-7b39-4e26-9057-8bf69e908388 success
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:38:56 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 09:38:56 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 09:44:22 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:44:23 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task f8b90164-5060-431d-8afc-27c95a9106ef success
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:44:23 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 09:44:23 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 09:44:30 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task e0e3cf43-f439-4f52-a8f3-cb05ca520d6b success
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 09:44:30 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 09:44:30 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:40:52 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 5c96882a-a9d9-4cdd-b971-afbe3d73924b success
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 16:40:52 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 16:40:52 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:43:41 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 22b92e34-eb35-4cce-99c0-0811e8fe773d success
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 16:43:41 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 16:43:41 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:46:43 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 4bde13db-9d58-4b9c-841b-e89dbdd8a097 success
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 16:46:43 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 16:46:43 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 16:46:43 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 16:46:50 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 4771ec3b-2f53-482e-8731-823b54381a45 success
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 16:46:50 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 16:46:50 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 16:46:51 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 16:46:51 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 16:46:51 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 16:46:51 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 16:46:51 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 16:46:51 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 16:46:51 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 16:46:51 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 16:46:51 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 16:46:51 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 16:46:51 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:22:59 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 86f8976c-aad2-4107-a859-79d2783ee719 success
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 17:22:59 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 17:22:59 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:22:59 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:24:10 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task db0ee3bc-ec74-461e-9297-c3fb055f0c5d success
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 17:24:10 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 17:24:10 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:24:10 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:24:10 | WARNING  | src.shared.database_manager:push_verify_code:366 - Verify code 111111 already exist, try again.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:24:49 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task ea660252-f26b-4c34-a9c0-3cba1ba4a50d success
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 17:24:49 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:24:49 | WARNING  | src.shared.database_manager:push_verify_code:366 - Verify code 111111 already exist, try again.
+2026-10-20 17:24:49 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_verify_code:351 - Recieved invalid verify code: 1
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_verify_code:354 - exp_time must be a float
+2026-10-20 17:24:49 | ERROR    | src.shared.database_manager:push_verify_code:357 - Recieved invalid max_retries: -1
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:24:57 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task b2ae6e4d-6211-4867-a003-bdba7aae1415 success
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 17:24:57 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:24:57 | WARNING  | src.shared.database_manager:push_verify_code:366 - Verify code 111111 already exist, try again.
+2026-10-20 17:24:57 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_verify_code:351 - Recieved invalid verify code: 1
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_verify_code:354 - exp_time must be a float
+2026-10-20 17:24:57 | ERROR    | src.shared.database_manager:push_verify_code:357 - Recieved invalid max_retries: -1
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:33:26 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 04ec5e41-a0c8-4e76-b4c7-029e14c393ff success
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 17:33:26 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 17:33:26 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:33:26 | WARNING  | src.shared.database_manager:push_verify_code:366 - Verify code 111111 already exist, try again.
+2026-10-20 17:33:26 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:33:27 | ERROR    | src.shared.database_manager:push_verify_code:351 - Recieved invalid verify code: 1
+2026-10-20 17:33:27 | ERROR    | src.shared.database_manager:push_verify_code:354 - exp_time must be a float
+2026-10-20 17:33:27 | ERROR    | src.shared.database_manager:push_verify_code:357 - Recieved invalid max_retries: -1
+2026-10-20 17:33:33 | INFO     | src.shared.database_manager:<module>:33 - Initialize Firebase Database Success.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:push_task:59 - Pushing 'task_1' task to test_user's database...
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:push_task:63 - Push data success.
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_task:53 - Recieved invalid user_id
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_task:56 - Recieved invalid data
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting all tasks from test_user's database.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_tasks:100 - Start getting 1 tasks from test_user's database.
+2026-10-20 17:33:34 | WARNING  | src.shared.database_manager:get_tasks:128 - No task id none_task found in Firebase.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_tasks:140 - Getting tasks success.
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:get_tasks:94 - Recieved invalid user_id: 123
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:get_tasks:97 - Recieved invalid task ids
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:delete_task:192 - Deleting task 7abbe4c1-17b7-47c6-8005-2fe24204c58e success
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:delete_task:174 - Recieved invalid user_id: 123
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:delete_task:179 - Recieved invalid task_and_subtask ids
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:delete_task:189 - Received wrong type id when deleting task: {'subtask': 'test_task'}
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:delete_task:182 - Start deleting tasks and subtasks from test_user's database
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:delete_task:202 - Recieved invalid key while deleting task or subtask.
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:delete_task:207 - Recieved unknown key in task_and_subtask_id. It must be task or subtask.
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_history:235 - Recieved invalid user_id: 123
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_history:238 - Recieved wrong file name: 2020_Q0
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_history:241 - Recieved wrong data type
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q4)
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_history:313 - History data reach 2 amount, stop getting histories.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 2 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_history:303 - 2019_Q4 does not exist, stop getting histories.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_history:295 - Strat reading 1 histories from test_user's database. (start from 2020_Q1)
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:get_history:313 - History data reach 1 amount, stop getting histories.
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:get_history:286 - Recieved invalid user_id: 123
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:get_history:289 - Recieved wrong file name: 2020
+2026-10-20 17:33:34 | WARNING  | src.shared.database_manager:get_history:292 - Recieved invalid amount: -1
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:push_verify_code:360 - Start pushing verify code 111111 to database.
+2026-10-20 17:33:34 | WARNING  | src.shared.database_manager:push_verify_code:366 - Verify code 111111 already exist, try again.
+2026-10-20 17:33:34 | INFO     | src.shared.database_manager:push_verify_code:370 - Verify code write success.
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_verify_code:351 - Recieved invalid verify code: 1
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_verify_code:354 - exp_time must be a float
+2026-10-20 17:33:34 | ERROR    | src.shared.database_manager:push_verify_code:357 - Recieved invalid max_retries: -1

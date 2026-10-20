@@ -86,6 +86,13 @@ ignore = ["BLE001", "TRY002"]
 addopts = "-v --cov=src --cov-report=term-missing"
 testpaths = ["src/tests"]
 
+[tool.coverage.run]
+omit = [
+    "*/__init__.py",
+    "src/tests/*",
+    ".venv/*"
+]
+
 [tool.bandit]
 targets = ["src"]
 exclude_dirs = ["tests", ".venv"]
