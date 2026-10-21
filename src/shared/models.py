@@ -5,6 +5,15 @@ from typing import Literal
 from pydantic import BaseModel, Field, field_serializer, model_validator
 
 
+# User Data
+class User(BaseModel):
+    user_id: str = Field(..., description="Line User ID")
+    username: str = Field("user", description="User nickname")
+    plan: Literal["free", "pro"] = Field("free", description="Current plan level")
+    plan_exp: datetime.datetime | None = Field(None, description="Current plan expire time")
+    remain_ai_requesrt: int | None = Field(5, description="Left AI Request / per day")
+
+
 # AI estimate infomations
 class EstimateData(BaseModel):
     task_category: Literal[

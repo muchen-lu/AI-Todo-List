@@ -3,6 +3,7 @@ import json
 import re
 import secrets
 import uuid
+from typing import Literal
 
 import firebase_admin
 from firebase_admin import credentials, db
@@ -10,7 +11,7 @@ from google.api_core import exceptions as google_exceptions
 
 from src.shared.config import get_settings
 from src.shared.logger import logger
-from src.shared.models import ActualData, CompleteItem, EstimateData, SubtaskItem, TodoItem
+from src.shared.models import ActualData, CompleteItem, EstimateData, SubtaskItem, TodoItem, User
 
 settings = get_settings()
 
@@ -33,6 +34,80 @@ try:
     logger.info("Initialize Firebase Database Success.")
 except Exception as e:
     logger.error(f"Initialize Firebase Database failed: {e}")
+
+
+def init_user(user_id: str):
+    if not user_id or not isinstance(user_id, str):
+        logger.error("Recieved invalid user_id")
+        raise ValueError("Invalid user_id")
+
+    user = User(user_id=user_id)
+
+    try:
+        db.reference(f"{user.user_id}/profile").set(user.model_dump(mode="json", exclude={"user_id"}))
+    except (google_exceptions.DeadlineExceeded, google_exceptions.ServiceUnavailable) as e:
+        logger.debug(f"Firebase Timeout: {str(e)}")
+        raise DatabaseTimeout("Database timeout, please try later.")
+    except google_exceptions.ResourceExhausted:
+        logger.warning("Firebase Resources exhausted.")
+        raise QuotaExceeded("Database quota reaches the limitation.")
+    except Exception as e:
+        logger.opt(exception=True).debug(f"Unknown error occur in Firebase: {str(e)}")
+        raise DatabaseError(f"Database process failed: {str(e)}")
+
+
+def get_user(user_id: str) -> User:
+    if not user_id or not isinstance(user_id, str):
+        logger.error("Recieved invalid user_id")
+        raise ValueError("Invalid user_id")
+
+    try:
+        user = db.reference(f"{user_id}/profile").get()
+    except (google_exceptions.DeadlineExceeded, google_exceptions.ServiceUnavailable) as e:
+        logger.debug(f"Firebase Timeout: {str(e)}")
+        raise DatabaseTimeout("Database timeout, please try later.")
+    except google_exceptions.ResourceExhausted:
+        logger.warning("Firebase Resources exhausted.")
+        raise QuotaExceeded("Database quota reaches the limitation.")
+    except Exception as e:
+        logger.opt(exception=True).debug(f"Unknown error occur in Firebase: {str(e)}")
+        raise DatabaseError(f"Database process failed: {str(e)}")
+
+    return User(user_id=user_id, **user)
+
+
+def change_user_plan(user_id: str, plan: Literal["free", "pro"], exp_time: datetime.datetime | None):
+    if not user_id or not isinstance(user_id, str):
+        logger.error("Recieved invalid user_id")
+        raise ValueError("Invalid user_id")
+    if plan not in ("free", "pro"):
+        logger.error("Recieved undefined plan")
+        raise ValueError("Invalid plan")
+    if not (isinstance(exp_time, datetime.datetime) or exp_time is None):
+        logger.error("Revieced unknown exp_time")
+        raise TypeError("Wrong exp_time")
+
+    try:
+        user = get_user(user_id)
+        match plan:
+            case "free":
+                user.plan = "free"
+                user.plan_exp = None
+                user.remain_ai_requesrt = 5
+            case "pro":
+                user.plan = "pro"
+                user.plan_exp = exp_time
+                user.remain_ai_requesrt = None
+        db.reference(f"{user.user_id}/profile").set(user.model_dump(mode="json", exclude={"user_id"}))
+    except (google_exceptions.DeadlineExceeded, google_exceptions.ServiceUnavailable) as e:
+        logger.debug(f"Firebase Timeout: {str(e)}")
+        raise DatabaseTimeout("Database timeout, please try later.")
+    except google_exceptions.ResourceExhausted:
+        logger.warning("Firebase Resources exhausted.")
+        raise QuotaExceeded("Database quota reaches the limitation.")
+    except Exception as e:
+        logger.opt(exception=True).debug(f"Unknown error occur in Firebase: {str(e)}")
+        raise DatabaseError(f"Database process failed: {str(e)}")
 
 
 def push_task(user_id: str, data: TodoItem):  # TODO: 未來要做新增子任務的功能

@@ -1,3 +1,4 @@
+import datetime
 import json
 from pathlib import Path
 from unittest.mock import MagicMock, call, patch
@@ -5,15 +6,18 @@ from unittest.mock import MagicMock, call, patch
 import pytest
 
 from src.shared.database_manager import (
+    change_user_plan,
     delete_task,
     get_history,
     get_tasks,
+    get_user,
     get_verify_code,
+    init_user,
     push_history,
     push_task,
     push_verify_code,
 )
-from src.shared.models import ActualData, CompleteItem, EstimateData, TodoItem
+from src.shared.models import ActualData, CompleteItem, EstimateData, TodoItem, User
 
 
 # *Load mock data
@@ -42,6 +46,82 @@ def mock_verify_env():
         mock_dt.datetime.now.return_value.timestamp.return_value = 1000.0
 
         yield {"datetime": mock_dt, "secrets": mock_secrets}
+
+
+# NOTE: test init_user
+# Case1: normal user
+def test_init_user(mock_db):
+    user = User(user_id="test_user")
+
+    init_user("test_user")
+
+    mock_db.assert_called_once_with("test_user/profile")
+    mock_db.return_value.set.assert_called_once_with(user.model_dump(mode="json", exclude={"user_id"}))
+
+
+# Case2: wrong user_id
+def test_init_user_with_wrong_user_id():
+    with pytest.raises(ValueError):
+        init_user(123)
+
+
+# NOTE: test get_user
+# Case1: normal use
+def test_get_user(mock_db):
+    user = User(user_id="test_user")
+    mock_db.return_value.get.return_value = {"username": "user", "plan": "free"}
+
+    result = get_user("test_user")
+
+    mock_db.assert_called_once_with("test_user/profile")
+
+    assert result.user_id == user.user_id
+
+
+# Case2: wrong user_id
+def test_get_user_with_wrong_user_id():
+    with pytest.raises(ValueError):
+        get_user(123)
+
+
+# NOTE: test change_user_plan
+# Case1: normal use change to free
+def test_change_user_plan_to_free(mock_db):
+    user_1 = User(user_id="test_user")
+    change_user_plan("test_user", "free", None)
+    mock_db.assert_called_with("test_user/profile")
+    mock_db.return_value.set.assert_called_once_with(user_1.model_dump(mode="json", exclude={"user_id"}))
+
+
+# Case2: normal use change to pro
+def test_change_user_plan_to_pro(mock_db):
+    user_2 = User(
+        user_id="test_user", plan="pro", plan_exp=datetime.datetime(2020, 1, 1, 23, 59, 59), remain_ai_requesrt=None
+    )
+    change_user_plan("test_user", "pro", datetime.datetime(2020, 1, 1, 23, 59, 59))
+    mock_db.assert_called_with("test_user/profile")
+    mock_db.return_value.set.assert_called_once_with(user_2.model_dump(mode="json", exclude={"user_id"}))
+
+
+# Case3: wrong user_id
+def test_change_user_plan_with_wrong_user_id():
+    with pytest.raises(ValueError):
+        change_user_plan(123, "free", None)
+
+
+# Case4: wrong plan
+def test_change_user_plan_with_wrong_plan():
+    with pytest.raises(ValueError):
+        change_user_plan("test_user", "unknown", None)
+
+
+# Case5: wrong exp_time
+def test_change_user_plan_with_wrong_exp_time():
+    with pytest.raises(TypeError):
+        change_user_plan("test_user", "free", 1)
+
+    with pytest.raises(TypeError):
+        change_user_plan("test_user", "free")
 
 
 # NOTE: test push_task
