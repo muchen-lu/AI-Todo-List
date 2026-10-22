@@ -8,6 +8,7 @@ import pytest
 from src.shared.database_manager import (
     change_user_plan,
     delete_task,
+    delete_verify_code,
     get_history,
     get_tasks,
     get_user,
@@ -430,27 +431,36 @@ def test_push_verify_code_with_wrong_max_retries():
 
 # NOTE: test get_verify_code
 # Case1: get valid code
-def get_verify_code_valid(mock_db, mock_verify_env):
+def test_get_verify_code_valid(mock_db, mock_verify_env):
     mock_db.return_value.get.return_value = {"status": "waiting", "exp_time": 5000.0}
 
-    status = get_verify_code(111111)
+    data = get_verify_code(111111)
 
     mock_db.assert_called_once_with("verify_code/111111")
-    assert status is True
+    assert data == {"code": 111111, "exp_time": 5000.0}
 
 
 # Case2: get expired code
-def get_verify_code_expired(mock_db, mock_verify_env):
+def test_get_verify_code_expired(mock_db, mock_verify_env):
     mock_db.return_value.get.return_value = {"status": "waiting", "exp_time": 500.0}
 
-    status = get_verify_code(111111)
+    data = get_verify_code(111111)
 
     mock_db.assert_called_once_with("verify_code/111111")
 
-    assert status is False
+    assert data == {"code": 111111, "exp_time": 500.0}
 
 
 # Case3: wrong code
-def get_verify_code_with_wrong_code(mock_db):
+def test_get_verify_code_with_wrong_code(mock_db):
     with pytest.raises(ValueError):
         get_verify_code(1)
+
+
+# NOTE: test delete_varify_code
+# Case1:
+def test_delete_varify_code(mock_db, mock_verify_env):
+    delete_verify_code(111111)
+
+    mock_db.assert_called_once_with("verify_code/111111")
+    mock_db.return_value.delete.assert_called_once()

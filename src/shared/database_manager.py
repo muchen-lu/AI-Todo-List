@@ -457,7 +457,7 @@ def push_verify_code(code: int, exp_time: float, max_retries: int = 10):
         raise DatabaseError(f"Database process failed: {str(e)}")
 
 
-def get_verify_code(code: int) -> bool:
+def get_verify_code(code: int) -> dict:
     """Get specified verify code. And delete
 
     Args:
@@ -482,15 +482,32 @@ def get_verify_code(code: int) -> bool:
     try:
         data = db.reference(f"verify_code/{code}").get()
         if data is None:
-            logger.error(f"Verify code {code} does not exist.")
-            return False
-        elif data["exp_time"] < datetime.datetime.now().timestamp():
-            logger.warning(f"Verify code {code} hase been expired.")
-            db.reference(f"verify_code/{code}").delete()
-            return False
-        else:
-            logger.info("Verify success.")
-            return True
+            logger.warning(f"Verify code {code} does not exist.")
+            return {}
+        logger.info("Get verify code success")
+        return {"code": code, "exp_time": data["exp_time"]}
+    except (google_exceptions.DeadlineExceeded, google_exceptions.ServiceUnavailable) as e:
+        logger.debug(f"Firebase Timeout: {str(e)}")
+        raise DatabaseTimeout("Database timeout, please try later.")
+    except google_exceptions.ResourceExhausted:
+        logger.warning("Firebase Resources exhausted.")
+        raise QuotaExceeded("Database quota reaches the limitation.")
+    except Exception as e:
+        logger.opt(exception=True).debug(f"Unknown error occur in Firebase: {str(e)}")
+        raise DatabaseError(f"Database process failed: {str(e)}")
+
+
+def delete_verify_code(code: int):
+    if not isinstance(code, int):
+        logger.error(f"Variable 'code' must be an integer: {code}")
+        raise TypeError("Does not recieved an integer variable.")
+    if not (100000 <= code and code <= 999999):
+        logger.error(f"Recieved invalid verify code: {code}")
+        raise ValueError("code does not fit the format.")
+
+    try:
+        db.reference(f"verify_code/{code}").delete()
+        logger.info("Delete verify code success.")
     except (google_exceptions.DeadlineExceeded, google_exceptions.ServiceUnavailable) as e:
         logger.debug(f"Firebase Timeout: {str(e)}")
         raise DatabaseTimeout("Database timeout, please try later.")
