@@ -29,7 +29,7 @@ gui = [
     "keyboard>=0.13.5",
     "playwright>=1.58.0",
     "pyqt6>=6.11.0",
-    ]
+]
 
 [dependency-groups]
 dev = [

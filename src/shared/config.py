@@ -20,7 +20,8 @@ class Settings(BaseSettings):
 
     line_channel_access_token: str = Field(description="Line Channel Access Token")
     line_channel_secret: str = Field(description="Line Channel Secret")
-    # line_user_id: str = Field(description="Line User ID")
+
+    project_url: str = Field(validation_alias="SERVER_URL", description="Server URL")
 
 
 @lru_cache

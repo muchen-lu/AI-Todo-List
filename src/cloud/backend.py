@@ -4,6 +4,7 @@ from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.webhooks import MessageEvent, TextMessageContent
 
 from src.cloud.authentication import pairing_code
+from src.cloud.line_notifier import reply_user
 from src.shared.config import get_settings
 
 settings = get_settings()
@@ -38,7 +39,13 @@ async def callback(request: Request, background_tasks: BackgroundTasks, x_line_s
 def handle_message(event):
     user_id = event.source.user_id
     message_text = event.message.text
-    # reply_token = event.reply_token
+    reply_token = event.reply_token
 
     if len(message_text.strip()) == 6:
-        pairing_code(message_text.strip(), user_id)
+        result = pairing_code(message_text.strip(), user_id)
+        if result:
+            reply_user(user_id, "pair", reply_token, message="恭喜綁定成功！請回到電腦進行其餘設定")
+        else:
+            reply_token(
+                user_id, "pair", reply_token, message="綁定失敗，驗證碼可能已過期或不存在，請回電腦重新生成驗證碼"
+            )

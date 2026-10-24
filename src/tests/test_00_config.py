@@ -12,6 +12,7 @@ def test_read_environment_variable():
     assert settings.ono_username == "ono-username"
     assert settings.ono_password == "ono-password"
     assert settings.database_key == "your-firebase-key"
+    assert settings.project_url == "your-server-url"
 
 
 # Case2: test changed environment variable read
